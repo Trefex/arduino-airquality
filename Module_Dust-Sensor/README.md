@@ -7,5 +7,7 @@ Stay tuned for updates.
 
 # Assembly
 
-![Dust_SensorArduino](https://github.com/Trefex/arduino-airquality/tree/master/Module_Dust-Sensor/assembly/Arduino_Fio_Sketch_Fritzing_schem.jpg)
+![Dust_SensorArduino](https://raw.github.com/Trefex/arduino-airquality/master/Module_Dust-Sensor/assembly/Arduino_Fio_Sketch_Fritzing_schem.jpg)
+
+
 
