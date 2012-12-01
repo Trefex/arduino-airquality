@@ -9,5 +9,6 @@ Stay tuned for updates.
 
 ![Dust_SensorArduino](https://raw.github.com/Trefex/arduino-airquality/master/Module_Dust-Sensor/assembly/Arduino_Fio_Sketch_Fritzing_schem.jpg)
 
+\includegraphics[keepaspectratio,width=\textwidth, height=.8\textheight]{https://raw.github.com/Trefex/arduino-airquality/master/Module_Dust-Sensor/assembly/Arduino_Fio_Sketch_Fritzing_schem.jpg} 
 
 
