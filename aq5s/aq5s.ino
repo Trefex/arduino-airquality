@@ -1,6 +1,6 @@
 /*
  Module using an Arduino Fio, a Sharp Optical Dust Sensor GP2Y1010AU0F,
- an Adafruit Ultimate GPS Breakout v3 and an OpenLog data logger.
+ an Adafruit Ultimate GPS Breakout 3v3 and an OpenLog data logger.
  
  Blog: http://arduinodev.woofex.net/2012/12/16/sharp-dust-sensor-with-adafruit-gps-v3/
  Code: https://github.com/Trefex/arduino-airquality/
@@ -20,7 +20,7 @@
 #include <Arduino.h>
 
 #define USE_OPENLOG // disable to remove logging
-#define USE_GPS // disable to remove GPS
+//#define USE_GPS // disable to remove GPS
 #define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
 #define GPSECHO true // put to true if you want to see raw GPS data flowing
@@ -40,8 +40,8 @@
 #endif
 
 // Pin definitions
-#define HT_DATA_PIN 10  // Humidity/Temp sensor data
-#define HT_SCK_PIN 11  // Humidity/Temp sensor serial clock
+#define HT_DATA_PIN 11  // Humidity/Temp sensor data
+#define HT_SCK_PIN 13  // Humidity/Temp sensor serial clock
 
 #define DUST_RX_PIN 6  // Dust sensor (Analog 6)
 #define DUST_LED_PIN 12  // Dust sensor led
@@ -92,20 +92,25 @@ int sleepTime = 9680;
 float voMeasured = 0;
 float calcVoltage = 0;
 float dustDensity = 0;
+float temp_c = -99;
+float humid = -99;
 
 uint32_t timer = millis();
 
 void setup(){
   #ifdef DEBUG_ON
+    // 115200 baud rate for connection
     Serial.begin(115200);
   #endif
   
-  pinMode(DUST_LED_PIN,OUTPUT);
-  pinMode(ADAGPS_RESET, OUTPUT);
+  // define pins as output mode
+  pinMode(DUST_LED_PIN, OUTPUT);
+  //pinMode(ADAGPS_RESET, OUTPUT);
   
-  digitalWrite(ADAGPS_RESET, LOW);
-  delay(2000);
-  digitalWrite(ADAGPS_RESET, HIGH);
+  // reset the GPS, but we the cable is not connected
+  //digitalWrite(ADAGPS_RESET, LOW);
+  //delay(2000);
+  //digitalWrite(ADAGPS_RESET, HIGH);
   
   #ifdef USE_GPS
     GPS.begin(9600);
@@ -134,19 +139,15 @@ void setup(){
 void loop(){
   delay(2000);
   #ifdef DEBUG_ON
-    Serial.println("\nBeing of loop");
+    Serial.println("\nBegining of loop");
   #endif
 
   // Take measurement every two seconds
   // if (millis() - timer > 2000) { 
     #ifdef USE_OPENLOG
+      // listen for data
       OpenLog.listen();
       delay(20);
-    #endif
- 
-    #ifdef USE_HT 
-      float temp_c;
-      float humid;
     #endif
  
     digitalWrite(DUST_LED_PIN,LOW); // power on the LED
@@ -158,21 +159,25 @@ void loop(){
     digitalWrite(DUST_LED_PIN,HIGH); // turn the LED off
     delayMicroseconds(sleepTime);
   
-    // 0 - 3.3V mapped to 0 - 1023 integer values
-    // recover voltage
-    calcVoltage = voMeasured * (3.3 / 1024); 
+    // VoMeasured returns a value between 0-1023 relative to 3.3V 
+    // We convert this value to a voltage value used for dust density
+    calcVoltage = 3.3 * (voMeasured / 1023);
+    // Note that we use a step up voltage regulator to get 5V powering the dust sensor
     
+    // Convert voltage to density
+    // Convert voltage to dust density (ug/m3) based on
     // linear eqaution taken from http://www.howmuchsnow.com/arduino/airquality/
     // Chris Nafis (c) 2012
-    dustDensity = (0.17 * calcVoltage - 0.1)*1000; 
+    dustDensity = (0.17 * calcVoltage - 0.1)*1000;
     
     //if(dustDensity < 0) {
       //dustDensity = 0;
     //}
 
+
     // Get temperature
     #ifdef USE_HT
-      // Read values from the sensor
+      // Read values from the sensor, humidity first
       humid = th_sensor.readHumidity();
       temp_c = th_sensor.retrieveTemperatureC();
     #endif
@@ -195,11 +200,12 @@ void loop(){
           delay(15);
           #ifdef USE_BARO
             OpenLog.print(BMP.readTemperature()); OpenLog.print(";");
-            OpenLog.println(BMP.readPressure()); 
+            OpenLog.print(BMP.readPressure()); OpenLog.print(";");
+            delay(15);
           #endif
           
           #ifdef USE_HT
-            OpenLog.print(temp_c);
+            OpenLog.print(temp_c); OpenLog.print(";");
             OpenLog.println(humid);
           #endif
           
@@ -209,27 +215,37 @@ void loop(){
     #else
       #ifdef USE_OPENLOG
         OpenLog.print("<< ");
-        OpenLog.print(dustDensity); OpenLog.print(";");
-      #endif
-    #endif 
-    
-    #ifdef USE_BARO
-      #ifdef DEBUG_ON
-        Serial.print("\nTemperature: "); Serial.print(BMP.readTemperature()); Serial.println(" *C");
-        Serial.print("Pressure: "); Serial.print(BMP.readPressure()); Serial.println(" Pa");
-        Serial.print("Altitude: "); Serial.print(BMP.readAltitude()); Serial.println(" meters");
-      #endif  
-      #ifndef USE_GPS // Print BMP alone when no GPS is present
-        #ifdef USE_OPENLOG
-          OpenLog.print(BMP.readTemperature()); OpenLog.print(";");
-          OpenLog.println(BMP.readPressure()); 
-          delay(15);
+        OpenLog.print(dustDensity);
+        OpenLog.print(";");
+        #ifdef USE_BARO
+           OpenLog.print(BMP.readTemperature());
+           OpenLog.print(";");
+           OpenLog.print(BMP.readPressure());
+           OpenLog.print(";");
+        #endif
+        #ifdef USE_HT
+           OpenLog.print(temp_c);
+           OpenLog.print(";");
+           OpenLog.println(humid);
         #endif
       #endif
     #endif
     
-    #ifdef DEBUG_ON 
-      Serial.print("Dust Density [ug/m3]: ");  Serial.println(dustDensity);
+    
+    
+    #ifdef DEBUG_ON
+      #ifdef USE_BARO
+        Serial.print("\nTemperature: "); Serial.print(BMP.readTemperature()); Serial.println(" [*C]");
+        Serial.print("Pressure: "); Serial.print(BMP.readPressure()); Serial.println(" [Pa]");
+        Serial.print("Altitude: "); Serial.print(BMP.readAltitude()); Serial.println(" [meters]");
+      #endif
+      Serial.print("Dust Density: ");  Serial.print(dustDensity); Serial.println(" [ug/m3]");
+      Serial.print("Voltage Calculated: ");  Serial.print(calcVoltage); Serial.println(" [V]");
+      Serial.print("Analogue Read: ");  Serial.print(voMeasured); Serial.println(" [0-1023]");
+      #ifdef USE_HT
+        Serial.print("\nTemperature: "); Serial.print(temp_c); Serial.println(" [*C]");
+        Serial.print("Humidity: "); Serial.print(humid); Serial.println(" [%] RH");
+      #endif
     #endif
  // }
   
@@ -238,9 +254,9 @@ void loop(){
     //delay(1000);
   #endif
 
-  unsigned long start = millis(); // begin listening to the GPS
-  // Listen to GPS for two seconds or until fix has been reached, whichever comes first
   #ifdef USE_GPS
+    unsigned long start = millis(); // begin listening to the GPS
+    // Listen to GPS for two seconds or until fix has been reached, whichever comes first
     while (start + 2000 > millis()) {
       if (! usingInterrupt) {
           // read data from the GPS in the 'main loop'
