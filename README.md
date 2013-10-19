@@ -14,6 +14,7 @@ We are working on combining them all into a nice light package.
 
 To do:
 - Determine if Fio has a voltage limit, our dust sensor could output a reading of up to ~3.75V
+	It seems the only limit is on current, eg 20 mA per Pin, and 150 mA total for the board.
 - Cook the CO sensor for 24-48 hours
 - Add the CO sensor to bread board
 - Add additional power supply for C0
