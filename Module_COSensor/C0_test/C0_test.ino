@@ -13,8 +13,8 @@
 #define READ_MONOX_PIN  7
 
 // literal/constants definitions
-#define HIGH_V_TIME 6 //60
-#define LOW_V_TIME 9 //90
+#define HIGH_V_TIME 60 //60
+#define LOW_V_TIME 90 //90
 
 // Variable initializations
 int reading; // holds value [0 - 1023]
@@ -54,11 +54,6 @@ void loop() {
   Serial.print("\nRecorded reading: ");
   Serial.println(reading);
 }
-
-
-
-
-
 
 
 
