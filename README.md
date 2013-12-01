@@ -25,3 +25,4 @@ To do:
 Long term steps
 - Solder everything on prototype board
 - Build enclosure
+- Evaluate the need of adding additional sensors, such as MQ-131 for Ozone 
