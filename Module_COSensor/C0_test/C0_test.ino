@@ -1,11 +1,19 @@
 /*
-  #############################################
-  C0 Sensor (MQ-7 on Parallax Gas Sensor Module
-  basic test using Arduino Fio (3.3V) with additional
-  battery/power source
-  #############################################
-  
-  When heating the coil
+ Module using an Arduino Fio and a MQ-7 on Parallax Gas Sensor Module.
+ A seperate power source is used as the Fio cannot source enough current 
+ for the MQ-7 module.
+ 
+ Blog: http://arduinodev.woofex.net/
+ Code: https://github.com/Trefex/arduino-airquality/
+
+ For Pin connections, please check the Blog or the github project page
+ Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
+ Changelog:
+   2013-Dec-01: First version with working codebase
+
+ This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+ To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter 
+ to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA. 
  */
 
 // Pin definitions
