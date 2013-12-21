@@ -1,0 +1,11 @@
+Note regarding Gas Sensor Module (GSM)
+- only interested in TP1 which varies from 0V - 5V
+- not interested in other TP (TP2/4 GRND, TP3 Alarm trip level)
+- don't need to calibrate trip level screw on left, other than set it very high so it actually is a coherent visual warning..
+- adding a 1k resistor between TP1 and Fio
+- soldered wire to TP1
+
+CO sensor:
+When heating should pull about 165 mA, 60mA when 'off'
+Needs a 5V signal to heat switch (HSW) to turn it on
+Needs a 1.4V signal to HSW to let the sensor 'cool'

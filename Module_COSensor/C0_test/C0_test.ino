@@ -41,27 +41,29 @@ void loop() {
   
   // turn on heating coil to 'clean' it/remove humidity, wait
   pinMode(ACTIVE_MONOX_PIN, OUTPUT);
-  analogWrite(ACTIVE_MONOX_PIN, 128);
-  Serial.println("\nHot/purge readings:");
+  analogWrite(ACTIVE_MONOX_PIN, 255);
+  //Serial.println("\nHot/purge readings:");
   for( x = 0; x < HIGH_V_TIME; x++) {
-    delay(1000);
+    Serial.print("H,");
     Serial.println(analogRead(READ_MONOX_PIN));
+    delay(1000);
   }
   
   // turn off sensor and let it cool
-  analogWrite(ACTIVE_MONOX_PIN, 0);
+
   pinMode(ACTIVE_MONOX_PIN, INPUT);
-  Serial.println("Cool/sense readings:");
-  for( x = 0; x < LOW_V_TIME; x++) {
-    delay(1000);
+  analogWrite(ACTIVE_MONOX_PIN, 71);
+  //Serial.println("Cool/sense readings:");
+  for( x = 0; x < LOW_V_TIME; x++) {`
+    Serial.print("C,");
     Serial.println(analogRead(READ_MONOX_PIN));
+    delay(1000);
   }
   
-  // now measure, before we turn it the heating coil on again
+  // now measure, before we turn the heating coil back on again
   reading = analogRead(READ_MONOX_PIN);
-  Serial.print("\nRecorded reading: ");
+  //Serial.print("\nRecorded reading: ");
+  Serial.print("R,");
   Serial.println(reading);
 }
-
-
 
