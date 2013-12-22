@@ -338,7 +338,7 @@ void loop(){
       #endif
       
       #ifdef USE_CO
-        Serial.print("\nCO Reading: "); Serial.print(co_tokeep); Serial.println(" [V]");
+        if(!co_state) Serial.print("\nCO Reading: "); Serial.print(co_tokeep); Serial.println(" [V]");
       #endif
     #endif
  // }
