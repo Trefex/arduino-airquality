@@ -18,6 +18,7 @@
 
 // Pin definitions
 #define ACTIVE_MONOX_PIN 11
+#define ACTIVE_MONOX_LED_PIN 13
 #define READ_MONOX_PIN  7
 
 // literal/constants definitions
@@ -30,6 +31,7 @@ int reading; // holds value [0 - 1023]
 void setup() {                
   // initialize pins' modes
   pinMode(ACTIVE_MONOX_PIN, OUTPUT);     
+  pinMode(ACTIVE_MONOX_LED_PIN, OUTPUT);     
   pinMode(READ_MONOX_PIN, INPUT);
   
   Serial.begin(9600);
@@ -42,12 +44,17 @@ void loop() {
   // turn on heating coil to 'clean' it/remove humidity, wait
   pinMode(ACTIVE_MONOX_PIN, OUTPUT);
   analogWrite(ACTIVE_MONOX_PIN, 255);
+  // turn on led to indicate we are heating
+  digitalWrite(ACTIVE_MONOX_LED_PIN, HIGH);
   
   for( x = 0; x < HIGH_V_TIME; x++) {
     Serial.print("H,");
     Serial.println(analogRead(READ_MONOX_PIN));
     delay(1000);
   }
+
+  // turn off led indicating we are heating
+  digitalWrite(ACTIVE_MONOX_LED_PIN, LOW);
   
   // Turn down heater from 5V to 1.4V for 'cooling'
   // We need to allow 1.4 V through the heating coil, down from 5V
@@ -74,6 +81,7 @@ void loop() {
   
   // restart loop and turn the heating coil back on again
 }
+
 
 
 
