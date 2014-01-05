@@ -25,6 +25,7 @@ COS_MQ7::COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int
 	Last_time = 0;
 	Power_state = LOW;
   	State_duration = 500;//seconds	
+	State = 0;
 	Reading = -1;
 	Voltage = -1;
 }
@@ -61,10 +62,13 @@ void COS_MQ7::Power_cycle(){
       analogWrite(_PWM_Tog_Pin, 71); // need to use analogWrite to digital PWM pin
     }
 
+    // get current reading from CO and voltage
+    current_reading = analogRead(_CO_Reading_Pin);
+
     // cooling is finished, read
     if(State == 3){
       State = 4;
-      Reading = analogRead(READ_MONOX_PIN);
+      Reading = current_reading;
     }
 
     if(State == 4){
@@ -76,7 +80,12 @@ void COS_MQ7::Power_cycle(){
 int COS_MQ7::Get_CO_reading(){
 	// will begin heating again after next Power_cycle() call
 	State = 1;
+	Reading = -1;
 	return Reading;
+}
+
+int COS_MQ7::Get_current_CO_reading(){
+	return current_reading;
 }
 
 int COS_MQ7::Get_Voltage_reading(){
