@@ -41,6 +41,7 @@ void COS_MQ7::Power_cycle(){
   // see if enough time has passed to change state
   if ( (Current_time - Last_time) > (State_duration * 1000) ){
     Last_time = Current_time;
+    State_duration = 0;
 
     // complete one of the following based on State
     switch(State) {

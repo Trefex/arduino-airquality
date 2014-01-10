@@ -51,6 +51,7 @@ void loop() {
   }
   
   // Do something when CO psu voltage is too low
+  
   if(MQ7.Get_Voltage_reading() < 400) {
     Serial.println("CO sensor power supply voltage is too low.");
     // do something

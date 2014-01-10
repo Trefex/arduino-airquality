@@ -5,6 +5,7 @@ plot_co_data('output3.txt')
 plot_co_data('output4.txt')
 plot_co_data('output5.txt')
 data <- plot_co_data('output6.txt')
+
 plot_co_data('li-ion_output.txt')
 plot_co_data('butane_exposure.txt')
 
@@ -20,3 +21,8 @@ plot_co_data <- function(fn) {
   legend('topleft', legend=dict[names(table(fd$type))], col=c(1:4), pch=1, cex=0.7)
   return(fd)
 }
+
+libdata <- read.table('output7.txt',sep=',')
+names(libdata) <- c('mode', 'voltage','CO')
+plot(libdata[libdata$mode == 4,]$CO)
+plot(libdata$CO, cex=0.5)
