@@ -22,13 +22,13 @@
 #include <Arduino.h>
 
 // Allow for basic C++ functions
-#include <StandardCplusplus.h>
+/*#include <StandardCplusplus.h>
 #include <system_configuration.h>
 #include <unwind-cxx.h>
 #include <utility.h>
 #include <vector>
 
-using namespace std;
+using namespace std;*/
 
 #define USE_OPENLOG // disable to remove logging
 #define USE_GPS // disable to remove GPS
@@ -92,7 +92,7 @@ using namespace std;
 #endif
 
 #ifdef USE_BARO
-  Adafruit_BMP085 BMP = Adafruit_BMP085(10050);
+  Adafruit_BMP085_Unified BMP = Adafruit_BMP085_Unified(10050);
 #endif
 
 #ifdef USE_GPS
