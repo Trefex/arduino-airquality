@@ -40,7 +40,9 @@ using namespace std;
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
-  #include "Adafruit_BMP085.h"
+  //#include "Adafruit_BMP085.h"
+  #include "Adafruit_BMP085_U.h"
+  #include "Adafruit_Sensor.h"
 #endif
 
 #ifdef USE_GPS
@@ -90,7 +92,7 @@ using namespace std;
 #endif
 
 #ifdef USE_BARO
-  Adafruit_BMP085 BMP;
+  Adafruit_BMP085 BMP = Adafruit_BMP085(10050);
 #endif
 
 #ifdef USE_GPS
@@ -122,6 +124,9 @@ float temp_c = -99;
 float humid = -99;
 
 int co_voltage = 0;
+
+float bmp_temp = 0;
+float bmp_pres = 0;
 
 uint32_t timer = millis();
 
@@ -221,6 +226,11 @@ void loop(){
       }
     #endif
     
+    #ifdef USE_BARO
+      BMP.getTemperature(&bmp_temp);
+      BMP.getPressure(&bmp_pres);
+    #endif
+    
     #ifdef USE_GPS // If GPS is on, print all sensor values, else only Dust
       if(GPS.fix) {
         #ifdef USE_OPENLOG
@@ -240,9 +250,9 @@ void loop(){
           delay(15);
           
           #ifdef USE_BARO
-            OpenLog.print(BMP.readTemperature()); OpenLog.print(";");
-            OpenLog.print(BMP.readPressure()); OpenLog.print(";");
-            delay(15);
+             OpenLog.print(bmp_temp); OpenLog.print(";");
+             OpenLog.print(bmp_pres); OpenLog.print(";");
+             delay(15);
           #endif
           
           #ifdef USE_HT
@@ -263,13 +273,15 @@ void loop(){
         OpenLog.print("<< ");
         OpenLog.print(dustDensity);
         OpenLog.print(";");
+        
         #ifdef USE_BARO
-           OpenLog.print(BMP.readTemperature());
+           OpenLog.print(bmp_temp);
            OpenLog.print(";");
-           OpenLog.print(BMP.readPressure());
+           OpenLog.print(bmp_pres);
            OpenLog.print(";");
            delay(15);
         #endif
+        
         #ifdef USE_HT
            OpenLog.print(temp_c);
            OpenLog.print(";");
@@ -288,13 +300,14 @@ void loop(){
     
     #ifdef DEBUG_ON
       #ifdef USE_BARO
-        Serial.print("\nTemperature: "); Serial.print(BMP.readTemperature()); Serial.println(" [*C]");
-        Serial.print("Pressure: "); Serial.print(BMP.readPressure()); Serial.println(" [Pa]");
-        Serial.print("Altitude: "); Serial.print(BMP.readAltitude()); Serial.println(" [meters]");
+        Serial.print("\nTemperature: "); Serial.print(bmp_temp); Serial.println(" [*C]");
+        Serial.print("Pressure: "); Serial.print(bmp_pres); Serial.println(" [hPa]");
       #endif
+      
       Serial.print("Dust Density: ");  Serial.print(dustDensity); Serial.println(" [ug/m3]");
       Serial.print("Voltage Calculated: ");  Serial.print(calcVoltage); Serial.println(" [V]");
       Serial.print("Analogue Read: ");  Serial.print(voMeasured); Serial.println(" [0-1023]");
+      
       #ifdef USE_HT
         Serial.print("\nTemperature: "); Serial.print(temp_c); Serial.println(" [*C]");
         Serial.print("Humidity: "); Serial.print(humid); Serial.println(" [%] RH");
