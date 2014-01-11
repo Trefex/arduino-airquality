@@ -2,12 +2,13 @@
  Module using an Arduino Fio, a Sharp Optical Dust Sensor GP2Y1010AU0F,
  an Adafruit Ultimate GPS Breakout 3v3 and an OpenLog data logger.
  
- Blog: http://arduinodev.woofex.net/2012/12/16/sharp-dust-sensor-with-adafruit-gps-v3/
+ Blog: TO COME
  Code: https://github.com/Trefex/arduino-airquality/
 
  For Pin connections, please check the Blog or the github project page
  Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
  Changelog:
+   2014-Dec-11: Added CO code through library addition
    2012-Dec-16: First version working. Need to clean-up code
    2013-Dec-22: Added CO Sensor
 
