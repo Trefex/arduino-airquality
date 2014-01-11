@@ -2,12 +2,13 @@
  Module using an Arduino Fio, a Sharp Optical Dust Sensor GP2Y1010AU0F,
  an Adafruit Ultimate GPS Breakout 3v3 and an OpenLog data logger.
  
- Blog: http://arduinodev.woofex.net/2012/12/16/sharp-dust-sensor-with-adafruit-gps-v3/
+ Blog: TO COME
  Code: https://github.com/Trefex/arduino-airquality/
 
  For Pin connections, please check the Blog or the github project page
  Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
  Changelog:
+   2014-Dec-11: Added CO code through library addition
    2012-Dec-16: First version working. Need to clean-up code
    2013-Dec-22: Added CO Sensor
 
@@ -50,6 +51,10 @@ using namespace std;
   #include "SHT1x.h"
 #endif
 
+#ifdef USE_CO
+  #include "COS_MQ7.h"
+#endif
+
 // Pin definitions
 #define HT_DATA_PIN 11  // Humidity/Temp sensor data
 #define HT_SCK_PIN 13  // Humidity/Temp sensor serial clock
@@ -65,10 +70,15 @@ using namespace std;
 #define ADAGPS_TX_PIN 3 // GPS TX to ADAGPS_TX_PIN
 #define ADAGPS_RESET 10 // Pull Low to switch off the module
 
-// CO Sensor HSW Activation switch
-#define CO_HSW_SWITCH_PIN 5
-// CO Sensor Analog Reading Pin
-#define CO_READ_PIN A4
+#define ACTIVE_MONOX_LED_PIN 9 // CO LED Pin
+#define ACTIVE_MONOX_PIN 5 // CO Switch Pin
+#define READ_MONOX_PIN A2 // CO Read Pin
+#define READ_COPSV_PIN A3 // CO Power Supply Voltage
+
+
+#ifdef USE_CO
+  COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN);
+#endif
 
 // Constructor declarations
 #ifdef USE_HT
@@ -111,21 +121,9 @@ float dustDensity = 0;
 float temp_c = -99;
 float humid = -99;
 
+int co_voltage = 0;
+
 uint32_t timer = millis();
-
-// literal/constants definitions
-#define CO_HIGH_V_TIME 50000 // 50s and 10s will be added in the timer runs
-#define CO_LOW_V_TIME 80000 // 90s
-
-unsigned long co_currTime = millis(); // Timer for CO heating cycles
-unsigned long co_prevTime = millis(); 
-unsigned long co_timer = 60;
-
-vector<float> co_vals;
-float co_reading = 0; // holds value [0 - 1023]
-float co_tokeep = -99; // median value after max of 5 readings
-boolean co_state = false; // false = OFF, true = Heating
-
 
 void setup(){
   #ifdef DEBUG_ON
@@ -157,12 +155,6 @@ void setup(){
   
   #ifdef USE_BARO
     BMP.begin();
-  #endif
-  
-  #ifdef USE_CO
-    pinMode(CO_HSW_SWITCH_PIN, OUTPUT);     
-    pinMode(CO_READ_PIN, INPUT);
-    co_vals.reserve(6);
   #endif
 
   delay(1000);
@@ -222,46 +214,11 @@ void loop(){
     
     // Cycle Power of CO Sensor
     #ifdef USE_CO
-      co_currTime = millis();
-      // We heat and cool for 10 seconds longer than foreseen in order to collect proper 
-      // values
-      if(co_currTime - co_prevTime > co_timer + 10000) {
-       co_prevTime = co_currTime;
-       
-       if(co_state) { // State is high, switch to low
-         co_tokeep = -99;
-         co_state = false;
-         co_timer = CO_LOW_V_TIME;
-         analogWrite(CO_HSW_SWITCH_PIN, 255); // Switch HSW pin to High
-         #ifdef DEBUG_ON
-           Serial.println("Switching heater coil of CO Sensor on");
-         #endif
-       } else { // State is low, so compute value and switch back to High
-         // We just finished the cooling period should compute a Median value
-         sort(co_vals.begin(), co_vals.end()); // Sort Vector
-         co_tokeep = co_vals[floor(co_vals.size()/2.0)];
-         co_tokeep = 3.3 * co_tokeep / 1023;
-         
-         co_vals.clear();
-
-         co_state = true;
-         co_timer = CO_HIGH_V_TIME;
-         
-         // PWM @ 1.4/5*255 = 71 for 1.4 V on the HSW pin
-         analogWrite(CO_HSW_SWITCH_PIN, 71); // Switch HSW pin to 1.4 V
-
-         #ifdef DEBUG_ON
-           Serial.println("Switching heater coil of CO Sensor to low power");
-         #endif
-       }  
-      }     
-    
-    // Between 90s and 100s, read up to 5 values into a vector  
-    if((millis() - co_prevTime >= co_timer) && !co_state) {
-      co_reading = analogRead(CO_READ_PIN);
-      co_vals.push_back(co_reading);
-    }
-
+      co_voltage = -1;
+      MQ7.Power_cycle();
+      if(MQ7.Get_state() == 4) {
+       co_voltage = MQ7.Get_CO_reading();
+      }
     #endif
     
     #ifdef USE_GPS // If GPS is on, print all sensor values, else only Dust
@@ -279,7 +236,9 @@ void loop(){
           OpenLog.print(GPS.longitude, 4); OpenLog.print(GPS.lon); OpenLog.print(";");
           // Dust Values
           OpenLog.print(dustDensity); OpenLog.print(";");
+          
           delay(15);
+          
           #ifdef USE_BARO
             OpenLog.print(BMP.readTemperature()); OpenLog.print(";");
             OpenLog.print(BMP.readPressure()); OpenLog.print(";");
@@ -292,7 +251,7 @@ void loop(){
           #endif
           
           #ifdef USE_CO
-            if(!co_state) OpenLog.print(co_tokeep); OpenLog.print(";");
+            if(co_voltage > 0) OpenLog.print(co_voltage); OpenLog.print(";");
           #endif
           
           OpenLog.print("\n");          
@@ -314,12 +273,16 @@ void loop(){
         #ifdef USE_HT
            OpenLog.print(temp_c);
            OpenLog.print(";");
-           OpenLog.println(humid);
+           OpenLog.print(humid);
+           OpenLog.print(";");
         #endif
       
         #ifdef USE_CO
-          if(!co_state) OpenLog.print(co_tokeep); OpenLog.print(";");
+          if(co_voltage > 0) OpenLog.print(co_voltage); OpenLog.print(";");
         #endif
+        
+        OpenLog.print("\n");
+        delay(15);
       #endif
     #endif
     
@@ -338,7 +301,10 @@ void loop(){
       #endif
       
       #ifdef USE_CO
-        if(!co_state) Serial.print("\nCO Reading: "); Serial.print(co_tokeep); Serial.println(" [V]");
+        Serial.print("\n");
+        Serial.print("CO Sensor State: "); Serial.println(MQ7.Get_state());
+        Serial.print("CO Voltage Reading: "); Serial.print(MQ7.Get_Voltage_reading());
+        Serial.print("CO Current Reading: "); Serial.println(MQ7.Get_current_CO_reading());
       #endif
     #endif
  // }
