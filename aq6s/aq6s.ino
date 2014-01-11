@@ -70,7 +70,7 @@ using namespace std;
 #define ADAGPS_RESET 10 // Pull Low to switch off the module
 
 #define ACTIVE_MONOX_LED_PIN 9 // CO LED Pin
-#define ACTIVE_MONOX_PIN 10 // CO Switch Pin
+#define ACTIVE_MONOX_PIN 5 // CO Switch Pin
 #define READ_MONOX_PIN A2 // CO Read Pin
 #define READ_COPSV_PIN A3 // CO Power Supply Voltage
 
