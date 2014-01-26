@@ -20,6 +20,7 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
 #include <Arduino.h>
+#include <math.h>
 
 // Allow for basic C++ functions
 /*#include <StandardCplusplus.h>
@@ -34,7 +35,7 @@ using namespace std;*/
 #define USE_GPS // disable to remove GPS
 #define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
-#define GPSECHO true // put to true if you want to see raw GPS data flowing
+#define GPSECHO false // put to true if you want to see raw GPS data flowing
 #define USE_HT // comment to remove Humidity and temperature sensor
 #define USE_CO // disable to remove CO sensor
 
@@ -72,10 +73,10 @@ using namespace std;*/
 #define ADAGPS_TX_PIN 3 // GPS TX to ADAGPS_TX_PIN
 #define ADAGPS_RESET 10 // Pull Low to switch off the module
 
-#define ACTIVE_MONOX_LED_PIN 9 // CO LED Pin
+#define ACTIVE_MONOX_LED_PIN 4 // CO LED Pin
 #define ACTIVE_MONOX_PIN 5 // CO Switch Pin
-#define READ_MONOX_PIN A2 // CO Read Pin
-#define READ_COPSV_PIN A3 // CO Power Supply Voltage
+#define READ_MONOX_PIN A7 // CO Read Pin
+#define READ_COPSV_PIN A1 // CO Power Supply Voltage
 
 
 #ifdef USE_CO
@@ -229,6 +230,7 @@ void loop(){
     #ifdef USE_BARO
       BMP.getTemperature(&bmp_temp);
       BMP.getPressure(&bmp_pres);
+      bmp_pres = bmp_pres / 100.0;
     #endif
     
     #ifdef USE_GPS // If GPS is on, print all sensor values, else only Dust
@@ -242,8 +244,8 @@ void loop(){
           delay(15);
           OpenLog.print(GPS.minute, DEC); OpenLog.print(":");
           OpenLog.print(GPS.seconds, DEC); OpenLog.print(";");
-          OpenLog.print(GPS.latitude, 4); OpenLog.print(GPS.lat); OpenLog.print(";"); 
-          OpenLog.print(GPS.longitude, 4); OpenLog.print(GPS.lon); OpenLog.print(";");
+          OpenLog.print(convertDegMinToDecDeg(GPS.latitude)); OpenLog.print(";"); OpenLog.print(GPS.lat); OpenLog.print(";"); 
+          OpenLog.print(convertDegMinToDecDeg(GPS.longitude)); OpenLog.print(";"); OpenLog.print(GPS.lon); OpenLog.print(";");
           // Dust Values
           OpenLog.print(dustDensity); OpenLog.print(";");
           
@@ -261,7 +263,7 @@ void loop(){
           #endif
           
           #ifdef USE_CO
-            if(co_voltage > 0) OpenLog.print(co_voltage); OpenLog.print(";");
+            OpenLog.print(co_voltage); OpenLog.print(";");
           #endif
           
           OpenLog.print("\n");          
@@ -290,7 +292,7 @@ void loop(){
         #endif
       
         #ifdef USE_CO
-          if(co_voltage > 0) OpenLog.print(co_voltage); OpenLog.print(";");
+          OpenLog.print(co_voltage); OpenLog.print(";");
         #endif
         
         OpenLog.print("\n");
@@ -316,7 +318,7 @@ void loop(){
       #ifdef USE_CO
         Serial.print("\n");
         Serial.print("CO Sensor State: "); Serial.println(MQ7.Get_state());
-        Serial.print("CO Voltage Reading: "); Serial.print(MQ7.Get_Voltage_reading());
+        Serial.print("CO Voltage Reading: "); Serial.println(MQ7.Get_Voltage_reading());
         Serial.print("CO Current Reading: "); Serial.println(MQ7.Get_current_CO_reading());
       #endif
     #endif
@@ -341,16 +343,20 @@ void loop(){
             // but only one character can be written at a time. 
       }
       
+ 
       // if a sentence is received, we can check the checksum, parse it...
+      //Serial.println("Before newNMEA");
       if (GPS.newNMEAreceived()) {
         // a tricky thing here is if we print the NMEA sentence, or data
         // we end up not listening and catching other sentences! 
         // so be very wary if using OUTPUT_ALLDATA and trytng to print out data
-        Serial.println(GPS.lastNMEA());   // this also sets the newNMEAreceived() flag to false
-        Serial.println("New GPS Sentence received");
+        //Serial.println(GPS.lastNMEA());   // this also sets the newNMEAreceived() flag to false
+        //Serial.println("New GPS Sentence received");
         //gpsReady = true;
         //break;
+        //Serial.println("Before GPS.lastNMEA");
         if (GPS.parse(GPS.lastNMEA())){   // this also sets the newNMEAreceived() flag to false
+        //Serial.println("Before GPS fix");
           if (GPS.fix) {
             #ifdef DEBUG_ON 
                 Serial.print("\nTime: ");
@@ -394,6 +400,22 @@ void clearSerial() {
     while(GPSSerial.read() >= 0) {;}
   #endif
   //while(OpenLog.read() >= 0){;}
+}
+
+// converts lat/long from Adafruit
+// degree-minute format to decimal-degrees
+double convertDegMinToDecDeg (float degMin) {
+  double min = 0.0;
+  double decDeg = 0.0;
+ 
+  //get the minutes, fmod() requires double
+  min = fmod((double)degMin, 100.0);
+ 
+  //rebuild coordinates in decimal degrees
+  degMin = (int) ( degMin / 100 );
+  decDeg = degMin + ( min / 60 );
+ 
+  return decDeg;
 }
 
 

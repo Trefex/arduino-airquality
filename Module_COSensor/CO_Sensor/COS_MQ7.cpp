@@ -85,9 +85,11 @@ void COS_MQ7::Power_cycle(){
 
 int COS_MQ7::Get_CO_reading(){
 	// will begin heating again after next Power_cycle() call
+        int tmpRet;
 	State = 1;
+        tmpRet = Reading;
 	Reading = -1;
-	return Reading;
+	return tmpRet;
 }
 
 int COS_MQ7::Get_current_CO_reading(){
