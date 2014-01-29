@@ -156,7 +156,22 @@ void setup(){
   #ifdef USE_OPENLOG
     // Setup OpenLog
     OpenLog.begin(9600);
-    pinMode(OPENLOG_RST_PIN, OUTPUT);  
+    pinMode(OPENLOG_RST_PIN, OUTPUT);
+    
+    //Reset OpenLog?
+    digitalWrite(resetOpenLog, LOW);
+    delay(100);
+    digitalWrite(resetOpenLog, HIGH);
+    
+    //Wait for OpenLog to respond with '<' to indicate it is alive and recording to a file
+    while(1) {
+      if(OpenLog.available()) {
+        if(OpenLog.read() == '<') {
+          Serial.println("OpenLog ready.");
+          break;
+        }
+      }
+    }
   #endif
   
   #ifdef USE_BARO
@@ -175,8 +190,6 @@ void loop(){
   #ifdef DEBUG_ON
     Serial.println("\nBegining of loop");
   #endif
-  
-  
 
   // Take measurement every two seconds
   // if (millis() - timer > 2000) { 
@@ -237,6 +250,7 @@ void loop(){
       if(GPS.fix) {
         #ifdef USE_OPENLOG
           OpenLog.print("<< ");
+          // print date time
           OpenLog.print(GPS.day, DEC); OpenLog.print("/");
           OpenLog.print(GPS.month, DEC); OpenLog.print("/20");
           OpenLog.print(GPS.year, DEC); OpenLog.print(";");
@@ -244,6 +258,7 @@ void loop(){
           delay(15);
           OpenLog.print(GPS.minute, DEC); OpenLog.print(":");
           OpenLog.print(GPS.seconds, DEC); OpenLog.print(";");
+          // print location
           OpenLog.print(convertDegMinToDecDeg(GPS.latitude)); OpenLog.print(";"); OpenLog.print(GPS.lat); OpenLog.print(";"); 
           OpenLog.print(convertDegMinToDecDeg(GPS.longitude)); OpenLog.print(";"); OpenLog.print(GPS.lon); OpenLog.print(";");
           // Dust Values
@@ -371,9 +386,10 @@ void loop(){
                 Serial.print("Fix: "); Serial.print((int)GPS.fix);
                 Serial.print(" quality: "); Serial.println((int)GPS.fixquality); 
                 Serial.print("Location: ");
-                Serial.print(GPS.latitude, 4); Serial.print(GPS.lat);
+                Serial.println(GPS.latitude,6);
+                Serial.print(convertDegMinToDecDeg(GPS.latitude),6); Serial.print(GPS.lat);
                 Serial.print(", "); 
-                Serial.print(GPS.longitude, 4); Serial.println(GPS.lon);
+                Serial.print(convertDegMinToDecDeg(GPS.longitude),6); Serial.println(GPS.lon);
                 
                 Serial.print("Speed (knots): "); Serial.println(GPS.speed);
                 Serial.print("Angle: "); Serial.println(GPS.angle);
