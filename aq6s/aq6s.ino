@@ -32,12 +32,12 @@
 using namespace std;*/
 
 #define USE_OPENLOG // disable to remove logging
-#define USE_GPS // disable to remove GPS
-#define USE_BARO // disable to remove Barometric sensor
+//#define USE_GPS // disable to remove GPS
+//#define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
 #define GPSECHO false // put to true if you want to see raw GPS data flowing
-#define USE_HT // comment to remove Humidity and temperature sensor
-#define USE_CO // disable to remove CO sensor
+//#define USE_HT // comment to remove Humidity and temperature sensor
+//#define USE_CO // disable to remove CO sensor
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
@@ -89,7 +89,7 @@ using namespace std;*/
 #endif
 
 #ifdef USE_OPENLOG
-  SoftwareSerial OpenLog(OPENLOG_RX_PIN, OPENLOG_TX_PIN);
+  SoftwareSerial OpenLog(OPENLOG_RX_PIN, OPENLOG_TX_PIN);  // RX, TX
 #endif
 
 #ifdef USE_BARO
@@ -154,24 +154,37 @@ void setup(){
   #endif
   
   #ifdef USE_OPENLOG
-    // Setup OpenLog
-    OpenLog.begin(9600);
+    // Setup and reset OpenLog
     pinMode(OPENLOG_RST_PIN, OUTPUT);
-    
-    //Reset OpenLog?
-    digitalWrite(resetOpenLog, LOW);
+    OpenLog.begin(9600);
+
+    // Reset OpenLog
+    digitalWrite(OPENLOG_RST_PIN, LOW);
     delay(100);
-    digitalWrite(resetOpenLog, HIGH);
+    digitalWrite(OPENLOG_RST_PIN, HIGH);
     
     //Wait for OpenLog to respond with '<' to indicate it is alive and recording to a file
+    
     while(1) {
       if(OpenLog.available()) {
-        if(OpenLog.read() == '<') {
-          Serial.println("OpenLog ready.");
-          break;
+
+        // print how much is available
+        Serial.print("There are ");Serial.print(OpenLog.available()); Serial.println(" characters available.");
+        
+        char olr = 'x';
+        while( OpenLog.available() > 0) {
+          olr = OpenLog.read();
+          Serial.print(olr);
+          
+          if( olr == '<' ) openlog_ready = true;
         }
+        Serial.print("\n");
+        if( openlog_ready ) break;
+        
+        delay(2000);
       }
     }
+    Serial.println("OpenLog is alive and recording.");
   #endif
   
   #ifdef USE_BARO
@@ -386,7 +399,6 @@ void loop(){
                 Serial.print("Fix: "); Serial.print((int)GPS.fix);
                 Serial.print(" quality: "); Serial.println((int)GPS.fixquality); 
                 Serial.print("Location: ");
-                Serial.println(GPS.latitude,6);
                 Serial.print(convertDegMinToDecDeg(GPS.latitude),6); Serial.print(GPS.lat);
                 Serial.print(", "); 
                 Serial.print(convertDegMinToDecDeg(GPS.longitude),6); Serial.println(GPS.lon);
