@@ -5,9 +5,9 @@
  
 #include <SoftwareSerial.h>
  
-#define OPENLOG_RST_PIN 6  // Openlogger (Digital 6)
-#define OPENLOG_TX_PIN 7  // Openlogger
-#define OPENLOG_RX_PIN 8  // Openlogger
+#define OPENLOG_RST_PIN 6 // D6 - Openlogger
+#define OPENLOG_TX_PIN 7  // D7 - Openlogger
+#define OPENLOG_RX_PIN 8  // D8 - Openlogger
 
 SoftwareSerial OpenLog(OPENLOG_RX_PIN, OPENLOG_TX_PIN); // RX, TX
 boolean openlog_ready = false;

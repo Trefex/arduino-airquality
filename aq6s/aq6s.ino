@@ -8,9 +8,11 @@
  For Pin connections, please check the Blog or the github project page
  Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
  Changelog:
-   2014-Dec-11: Added CO code through library addition
-   2012-Dec-16: First version working. Need to clean-up code
+   2014-Feb-09: Fixed OpenLog problems due to dust sensor
+   2013-Dec-11: Added CO code through library addition
    2013-Dec-22: Added CO Sensor
+   2013-Dec-16: First version working.
+
 
  This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter 
@@ -32,12 +34,13 @@
 using namespace std;*/
 
 #define USE_OPENLOG // disable to remove logging
-//#define USE_GPS // disable to remove GPS
-//#define USE_BARO // disable to remove Barometric sensor
+#define USE_GPS // disable to remove GPS
+#define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
 #define GPSECHO false // put to true if you want to see raw GPS data flowing
-//#define USE_HT // comment to remove Humidity and temperature sensor
-//#define USE_CO // disable to remove CO sensor
+#define USE_HT // comment to remove Humidity and temperature sensor
+#define USE_CO // disable to remove CO sensor
+#define USE_DUST // disable to remove DUST sensor
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
@@ -58,23 +61,24 @@ using namespace std;*/
   #include "COS_MQ7.h"
 #endif
 
+
 // Pin definitions
-#define HT_DATA_PIN 11  // Humidity/Temp sensor data
-#define HT_SCK_PIN 13  // Humidity/Temp sensor serial clock
+#define HT_DATA_PIN 11 //D11 - Humidity/Temp sensor data
+#define HT_SCK_PIN 13  //D13 - Humidity/Temp sensor serial clock
 
-#define DUST_RX_PIN 6  // Dust sensor (Analog 6)
-#define DUST_LED_PIN 12  // Dust sensor led
+#define DUST_RX_PIN A6  //A6 - Dust sensor (Analog 6)
+#define DUST_LED_PIN 12 //D12 - Dust sensor led
 
-#define OPENLOG_RST_PIN 6  // Openlogger (Digital 6)
-#define OPENLOG_TX_PIN 7  // Openlogger
-#define OPENLOG_RX_PIN 8  // Openlogger
+#define OPENLOG_RST_PIN 6 //D6 - Openlogger
+#define OPENLOG_TX_PIN 7  //D7 - Openlogger
+#define OPENLOG_RX_PIN 8  //D8 - Openlogger
 
-#define ADAGPS_RX_PIN 2 // GPS RX to Pin ADAGPS_RX_PIN
-#define ADAGPS_TX_PIN 3 // GPS TX to ADAGPS_TX_PIN
-#define ADAGPS_RESET 10 // Pull Low to switch off the module
+#define ADAGPS_RX_PIN 2 // D2 - GPS RX to Pin ADAGPS_RX_PIN
+#define ADAGPS_TX_PIN 3 // D3 - GPS TX to ADAGPS_TX_PIN
+#define ADAGPS_RESET 10 // D10 - (Not used) Pull Low to switch off the module
 
-#define ACTIVE_MONOX_LED_PIN 4 // CO LED Pin
-#define ACTIVE_MONOX_PIN 5 // CO Switch Pin
+#define ACTIVE_MONOX_LED_PIN 4 // D4 - CO LED Pin
+#define ACTIVE_MONOX_PIN 5 // D5 - CO Switch Pin
 #define READ_MONOX_PIN A7 // CO Read Pin
 #define READ_COPSV_PIN A1 // CO Power Supply Voltage
 
@@ -136,23 +140,8 @@ void setup(){
     // 115200 baud rate for connection
     Serial.begin(115200);
   #endif
-  
-  // define pins as output mode
-  pinMode(DUST_LED_PIN, OUTPUT);
-  //pinMode(ADAGPS_RESET, OUTPUT);
-  
-  // reset the GPS, but we the cable is not connected
-  //digitalWrite(ADAGPS_RESET, LOW);
-  //delay(2000);
-  //digitalWrite(ADAGPS_RESET, HIGH);
-  
-  #ifdef USE_GPS
-    GPS.begin(9600);
-    delay(40);
-    GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
-    GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
-  #endif
-  
+
+  // if the initialization of the OpenLog is after the DustSensor output is set to high this doesn't work???!!
   #ifdef USE_OPENLOG
     // Setup and reset OpenLog
     pinMode(OPENLOG_RST_PIN, OUTPUT);
@@ -169,7 +158,7 @@ void setup(){
       if(OpenLog.available()) {
 
         // print how much is available
-        Serial.print("There are ");Serial.print(OpenLog.available()); Serial.println(" characters available.");
+        Serial.print("There are ");Serial.print(OpenLog.available()); Serial.println(" characters available:");
         
         char olr = 'x';
         while( OpenLog.available() > 0) {
@@ -185,6 +174,26 @@ void setup(){
       }
     }
     Serial.println("OpenLog is alive and recording.");
+  #endif
+
+  // define dust pins as output mode  
+  #ifdef USE_DUST
+    pinMode(DUST_LED_PIN, OUTPUT);
+  #endif
+  
+  // define dust pins as output mode, reset GPS and begin GPS device
+  #ifdef USE_GPS
+    //pinMode(ADAGPS_RESET, OUTPUT);
+  
+    // reset the GPS (is not connected)
+    //digitalWrite(ADAGPS_RESET, LOW);
+    //delay(2000);
+    //digitalWrite(ADAGPS_RESET, HIGH);
+  
+    GPS.begin(9600);
+    delay(40);
+    GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+    GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);   // 1 Hz update rate
   #endif
   
   #ifdef USE_BARO
@@ -212,30 +221,31 @@ void loop(){
       delay(20);
     #endif
  
-    digitalWrite(DUST_LED_PIN,LOW); // power on the LED
-    delayMicroseconds(samplingTime);
-  
-    voMeasured = analogRead(DUST_RX_PIN); // read the dust value
+    #ifdef USE_DUST
+      digitalWrite(DUST_LED_PIN,LOW); // power on the LED
+      delayMicroseconds(samplingTime);
     
-    delayMicroseconds(deltaTime);
-    digitalWrite(DUST_LED_PIN,HIGH); // turn the LED off
-    delayMicroseconds(sleepTime);
-  
-    // VoMeasured returns a value between 0-1023 relative to 3.3V 
-    // We convert this value to a voltage value used for dust density
-    calcVoltage = 3.3 * (voMeasured / 1023);
-    // Note that we use a step up voltage regulator to get 5V powering the dust sensor
+      voMeasured = analogRead(DUST_RX_PIN); // read the dust value
+      
+      delayMicroseconds(deltaTime);
+      digitalWrite(DUST_LED_PIN,HIGH); // turn the LED off
+      delayMicroseconds(sleepTime);
     
-    // Convert voltage to density
-    // Convert voltage to dust density (ug/m3) based on
-    // linear eqaution taken from http://www.howmuchsnow.com/arduino/airquality/
-    // Chris Nafis (c) 2012
-    dustDensity = (0.17 * calcVoltage - 0.1)*1000;
-    
-    //if(dustDensity < 0) {
-      //dustDensity = 0;
-    //}
-
+      // VoMeasured returns a value between 0-1023 relative to 3.3V 
+      // We convert this value to a voltage value used for dust density
+      calcVoltage = 3.3 * (voMeasured / 1023);
+      // Note that we use a step up voltage regulator to get 5V powering the dust sensor
+      
+      // Convert voltage to density
+      // Convert voltage to dust density (ug/m3) based on
+      // linear eqaution taken from http://www.howmuchsnow.com/arduino/airquality/
+      // Chris Nafis (c) 2012
+      dustDensity = (0.17 * calcVoltage - 0.1)*1000;
+      
+      //if(dustDensity < 0) {
+        //dustDensity = 0;
+      //}
+    #endif
 
     // Get temperature
     #ifdef USE_HT
@@ -259,10 +269,10 @@ void loop(){
       bmp_pres = bmp_pres / 100.0;
     #endif
     
-    #ifdef USE_GPS // If GPS is on, print all sensor values, else only Dust
-      if(GPS.fix) {
-        #ifdef USE_OPENLOG
-          OpenLog.print("<< ");
+    #ifdef USE_OPENLOG
+      OpenLog.print("<< ");
+      #ifdef USE_GPS // If using GPS log data if a fix, otherwise write blanks
+        if(GPS.fix) {
           // print date time
           OpenLog.print(GPS.day, DEC); OpenLog.print("/");
           OpenLog.print(GPS.month, DEC); OpenLog.print("/20");
@@ -274,69 +284,48 @@ void loop(){
           // print location
           OpenLog.print(convertDegMinToDecDeg(GPS.latitude)); OpenLog.print(";"); OpenLog.print(GPS.lat); OpenLog.print(";"); 
           OpenLog.print(convertDegMinToDecDeg(GPS.longitude)); OpenLog.print(";"); OpenLog.print(GPS.lon); OpenLog.print(";");
-          // Dust Values
-          OpenLog.print(dustDensity); OpenLog.print(";");
-          
-          delay(15);
-          
-          #ifdef USE_BARO
-             OpenLog.print(bmp_temp); OpenLog.print(";");
-             OpenLog.print(bmp_pres); OpenLog.print(";");
-             delay(15);
-          #endif
-          
-          #ifdef USE_HT
-            OpenLog.print(temp_c); OpenLog.print(";");
-            OpenLog.print(humid); OpenLog.print(";");
-          #endif
-          
-          #ifdef USE_CO
-            OpenLog.print(co_voltage); OpenLog.print(";");
-          #endif
-          
-          OpenLog.print("\n");          
-          delay(15);
-        #endif
-      }
-    #else
-      #ifdef USE_OPENLOG
-        OpenLog.print("<< ");
-        OpenLog.print(dustDensity);
-        OpenLog.print(";");
-        
-        #ifdef USE_BARO
-           OpenLog.print(bmp_temp);
-           OpenLog.print(";");
-           OpenLog.print(bmp_pres);
-           OpenLog.print(";");
-           delay(15);
-        #endif
-        
-        #ifdef USE_HT
-           OpenLog.print(temp_c);
-           OpenLog.print(";");
-           OpenLog.print(humid);
-           OpenLog.print(";");
-        #endif
-      
-        #ifdef USE_CO
-          OpenLog.print(co_voltage); OpenLog.print(";");
-        #endif
-        
-        OpenLog.print("\n");
+        } else {
+          OpenLog.print(";;;;;;");
+        }
+      #else
+    
+      #ifdef_USE_DUST
+        // Dust Values
+        OpenLog.print(dustDensity); OpenLog.print(";");
         delay(15);
       #endif
+      
+      #ifdef USE_BARO
+         OpenLog.print(bmp_temp); OpenLog.print(";");
+         OpenLog.print(bmp_pres); OpenLog.print(";");
+         delay(15);
+      #endif
+      
+      #ifdef USE_HT
+        OpenLog.print(temp_c); OpenLog.print(";");
+        OpenLog.print(humid); OpenLog.print(";");
+      #endif
+      
+      #ifdef USE_CO
+        OpenLog.print(co_voltage); OpenLog.print(";");
+      #endif
+      
+      OpenLog.print("\n");          
+      delay(15);
     #endif
-    
+
+    // Debug/test printout of sensor values    
     #ifdef DEBUG_ON
       #ifdef USE_BARO
         Serial.print("\nTemperature: "); Serial.print(bmp_temp); Serial.println(" [*C]");
         Serial.print("Pressure: "); Serial.print(bmp_pres); Serial.println(" [hPa]");
       #endif
       
-      Serial.print("Dust Density: ");  Serial.print(dustDensity); Serial.println(" [ug/m3]");
-      Serial.print("Voltage Calculated: ");  Serial.print(calcVoltage); Serial.println(" [V]");
-      Serial.print("Analogue Read: ");  Serial.print(voMeasured); Serial.println(" [0-1023]");
+      #ifdef USE_DUST
+        Serial.print("Dust Density: ");  Serial.print(dustDensity); Serial.println(" [ug/m3]");
+        Serial.print("Voltage Calculated: ");  Serial.print(calcVoltage); Serial.println(" [V]");
+        Serial.print("Analogue Read: ");  Serial.print(voMeasured); Serial.println(" [0-1023]");
+      #endif
       
       #ifdef USE_HT
         Serial.print("\nTemperature: "); Serial.print(temp_c); Serial.println(" [*C]");
@@ -409,6 +398,10 @@ void loop(){
                 Serial.print("Satellites: "); Serial.println((int)GPS.satellites);
                 break;
             #endif
+          } else {
+            #ifdef DEBUG_ON
+              Serial.print("No GPS fix achieved.");
+            #endif
           }
         }
       }
@@ -420,28 +413,28 @@ void loop(){
   //delay(400);
 }
 
-void clearSerial() {
-  #ifdef DEBUG_ON
-    while (Serial.read() >= 0) {;}
-  #endif
-  #ifdef USE_GPS
-    while(GPSSerial.read() >= 0) {;}
-  #endif
-  //while(OpenLog.read() >= 0){;}
-}
+//void clearSerial() {
+//  #ifdef DEBUG_ON
+//    while (Serial.read() >= 0) {;}
+//  #endif
+//  #ifdef USE_GPS
+//    while(GPSSerial.read() >= 0) {;}
+//  #endif
+//  //while(OpenLog.read() >= 0){;}
+//}
 
 // converts lat/long from Adafruit
 // degree-minute format to decimal-degrees
 double convertDegMinToDecDeg (float degMin) {
-  double min = 0.0;
+  double minutes = 0.0;
   double decDeg = 0.0;
  
   //get the minutes, fmod() requires double
-  min = fmod((double)degMin, 100.0);
+  minutes = fmod((double)degMin, 100.0);
  
   //rebuild coordinates in decimal degrees
   degMin = (int) ( degMin / 100 );
-  decDeg = degMin + ( min / 60 );
+  decDeg = degMin + ( minutes / 60 );
  
   return decDeg;
 }
