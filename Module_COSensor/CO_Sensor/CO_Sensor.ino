@@ -29,9 +29,10 @@
 int reading, voltage;
 
 // create CO sensor object
-COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN);
+// Last parameter is the duration of initial purge in seconds, negative value sets to default 500 seconds
+COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN, -1);
 
-void setup() {                
+void setup() {
   Serial.begin(9600);
 }
 

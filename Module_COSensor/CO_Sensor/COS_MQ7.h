@@ -35,6 +35,7 @@ class COS_MQ7{
 		int _PWM_Tog_Pin;
 		int _CO_Reading_Pin;
 		int _V_Reading_Pin;
+		int _init_purge_sec;
 
 		int State;
 		int Reading;
