@@ -9,7 +9,7 @@
 #include "COS_MQ7.h"
 
 // Constructor
-COS_MQ7::COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int V_Reading_Pin){
+COS_MQ7::COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int V_Reading_Pin, int init_purge_sec){
 
 	pinMode(LED_Indicator_Pin, OUTPUT);
 	pinMode(PWM_Tog_Pin, OUTPUT);
@@ -21,6 +21,13 @@ COS_MQ7::COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int
 	_CO_Reading_Pin = CO_Reading_Pin;
 	_V_Reading_Pin = V_Reading_Pin;
 	
+	# set the duration of the initial purge
+	if (init_purge_sec < 0) {
+		_init_purge_sec = 500;
+	} else {
+		_init_purge_sec = init_purge_sec;
+	}
+
 	State = 0;
 	Current_time = millis();
 	Last_time = Current_time;
