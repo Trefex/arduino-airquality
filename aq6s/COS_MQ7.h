@@ -19,7 +19,7 @@
 class COS_MQ7{
 
 	public:
-		COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int V_Reading_Pin);
+		COS_MQ7(int LED_Indicator_Pin, int PWM_Tog_Pin, int CO_Reading_Pin, int V_Reading_Pin, int init_purge_sec);
 		void Power_cycle();
 		int Get_state();
 		int Get_CO_reading();

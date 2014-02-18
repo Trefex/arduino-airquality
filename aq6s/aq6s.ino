@@ -41,6 +41,7 @@ using namespace std;*/
 #define USE_HT // comment to remove Humidity and temperature sensor
 #define USE_CO // disable to remove CO sensor
 #define USE_DUST // disable to remove DUST sensor
+#define MUX // multiplexer/bit-shift register
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
@@ -82,6 +83,9 @@ using namespace std;*/
 #define READ_MONOX_PIN A7 // CO Read Pin
 #define READ_COPSV_PIN A1 // CO Power Supply Voltage
 
+#define MUX_DATA_PIN A2   // MUX-SI/14
+#define MUX_LATCH_PIN 10 // MUX-RCK/12
+#define MUX_CLOCK_PIN 9 // MUX-SCK/11
 
 #ifdef USE_CO
   COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN, -1);
@@ -129,6 +133,9 @@ float temp_c = -99;
 float humid = -99;
 
 int co_voltage = 0;
+
+int mux_int = 0;
+boolean mux_pulse = false;
 
 float bmp_temp = 0;
 float bmp_pres = 0;
@@ -198,6 +205,12 @@ void setup(){
   
   #ifdef USE_BARO
     BMP.begin();
+  #endif
+  
+  #ifdef MUX
+    pinMode(MUX_LATCH_PIN, OUTPUT);
+    pinMode(MUX_CLOCK_PIN, OUTPUT);
+    pinMode(MUX_DATA_PIN, OUTPUT);
   #endif
 
   delay(1000);
@@ -407,6 +420,42 @@ void loop(){
       }
     }
   #endif
+  
+  #ifdef MUX
+    // display led status
+    // we have two pulse stages to alternate leds and reduce current draw
+    if ( mux_pulse ) {
+      mux_int = 0;
+      mux_pulse = false;
+      
+      // see if we have GPS fix
+      if ( GPS.fix ) {
+        // turn on blue led
+        mux_int += 2;
+      }
+    } else {
+      // fio is on so turn on the green led
+      mux_int = 1;
+      mux_pulse = true;
+      
+      // see if the battery voltage is low (under 5 volts)
+      if ( co_voltage < 500 ) {
+        // turn on red led
+        mux_int += 4;
+      }      
+    }
+    
+    // unlatch to update mux value and wait a bit
+    digitalWrite(MUX_LATCH_PIN, LOW);
+    delay(100);
+    // send the byte/int corresponding to pins on
+    shiftOut(MUX_DATA_PIN, MUX_CLOCK_PIN, MSBFIRST, mux_int);
+    // latch back up to turn on
+    digitalWrite(MUX_LATCH_PIN, HIGH);
+  
+    #endif
+  
+  
   // if millis() or timer wraps around, we'll just reset it
   if (timer > millis())  timer = millis();
   //clearSerial();
