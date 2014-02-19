@@ -9,7 +9,7 @@ We currently have multiple components working correctly with the Arduino Fio:
 - [x] Dust sensor - Sharp Optical Dust Sensor
 - [x] Humidity and temperature sensor - SHT10 by sensiron/DFRobot
 - [x] Carbon monoxide sensor - Parallax CO sensor
-- [x] Barometric pressure - ???
+- [x] Barometric pressure - BMP085 Barometric Pressure/Temperature/Altitude Sensor
 
 We are working on combining them all into a nice light package.
 
