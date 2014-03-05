@@ -1,6 +1,8 @@
 /**
  * SHT1x Library
  *
+ * Modified by Cyrille Medard de Chardon, Christophe Terfois for 3V3 Arduino Fio
+ *
  * Copyright 2009 Jonathan Oxer <jon@oxer.com.au> / <www.practicalarduino.com>
  * Based on previous work by:
  *    Maurice Ribble: <www.glacialwanderer.com/hobbyrobotics/?p=5>

@@ -39,7 +39,7 @@ Example:
 
 ### retrieveTemperatureC() ###
 
-Returns a float of the temperature in celcius that was measured during the humidity measurement. This prevents needing two calls to the temperature sensor. Call the humidyt function readHumidity() then retrieveTemperatureC().
+Returns a float of the temperature in celcius that was measured during the humidity measurement. This prevents needing two calls to the temperature sensor. Call the humidty function readHumidity() then retrieveTemperatureC().
 
 ### readHumidity() ###
 

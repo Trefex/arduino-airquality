@@ -1,7 +1,7 @@
 /**
  * SHT1x Library
  *
- * Modified by Cyrille Medard de Chardon for 3V3 Arduino Fio
+ * Modified by Cyrille Medard de Chardon, Christophe Terfois for 3V3 Arduino Fio
  *
  * Copyright 2009 Jonathan Oxer <jon@oxer.com.au> / <www.practicalarduino.com>
  * Based on previous work by:
@@ -76,6 +76,7 @@ float SHT1x::readHumidity()
 //  const float C1 = -4.0;       // for 12 Bit
 //  const float C2 =  0.0405;    // for 12 Bit
 //  const float C3 = -0.0000028; // for 12 Bit
+  // Fio coefficients for SHT1x with 3.3V
   const float C1 = -2.0468;	// for 12 bit
   const float C2 = 0.0367;	// for 12 bit
   const float C3 = -0.0000015955;// for 12 bit, see Table 6 in SHT1x V5 datasheet
@@ -210,7 +211,7 @@ int SHT1x::getData16SHT(int _dataPin, int _clockPin)
   pinMode(_dataPin, INPUT);
   pinMode(_clockPin, OUTPUT);
   val = shiftIn(_dataPin, _clockPin, 8);
-  // ~25 degrees celcius == 25
+  // ~25 degrees celsius == 25
   val <<= 8;  //shift 8 bits left
   // ~25 degrees celsius == 6400
 
