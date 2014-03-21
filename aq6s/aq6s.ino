@@ -76,7 +76,6 @@ using namespace std;*/
 
 #define ADAGPS_RX_PIN 2 // D2 - GPS RX to Pin ADAGPS_RX_PIN
 #define ADAGPS_TX_PIN 3 // D3 - GPS TX to ADAGPS_TX_PIN
-#define ADAGPS_RESET 10 // D10 - (Not used) Pull Low to switch off the module
 
 #define ACTIVE_MONOX_LED_PIN 4 // D4 - CO LED Pin
 #define ACTIVE_MONOX_PIN 5 // D5 - CO Switch Pin
