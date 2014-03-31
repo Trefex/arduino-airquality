@@ -262,6 +262,55 @@ Volt-Reg</text>
 <text x="0" y="-6.35" size="1.016" layer="21" rot="R270">GND</text>
 <text x="2.54" y="-6.35" size="1.016" layer="21" rot="R270">5VOUT</text>
 </package>
+<package name="BATTERY_WITH_WIRE_HOLES">
+<hole x="1.27" y="6.35" drill="2"/>
+<hole x="1.27" y="10.16" drill="2"/>
+<hole x="5.08" y="10.16" drill="2"/>
+<hole x="5.08" y="6.35" drill="2"/>
+<pad name="GND" x="1.27" y="2.54" drill="0.8" shape="offset" rot="R270"/>
+<pad name="VCC" x="5.08" y="2.54" drill="0.8" shape="offset" rot="R270"/>
+<wire x1="0" y1="0" x2="6.35" y2="0" width="0.127" layer="21"/>
+<wire x1="6.35" y1="0" x2="6.35" y2="11.43" width="0.127" layer="21"/>
+<wire x1="6.35" y1="11.43" x2="0" y2="11.43" width="0.127" layer="21"/>
+<wire x1="0" y1="11.43" x2="0" y2="0" width="0.127" layer="21"/>
+<text x="3.175" y="7.62" size="1.27" layer="21" align="bottom-center">&gt;NAME</text>
+<text x="3.175" y="3.81" size="1.27" layer="21" align="bottom-center">&gt;VALUE</text>
+</package>
+<package name="GSM_PARALLAX">
+<pad name="ALR" x="9.906" y="3.81" drill="0.8"/>
+<pad name="HSW" x="12.446" y="3.81" drill="0.8"/>
+<pad name="+5V" x="14.986" y="3.81" drill="0.8"/>
+<pad name="GND" x="17.526" y="3.81" drill="0.8"/>
+<circle x="25.4" y="19.05" radius="1.27" width="0.127" layer="21"/>
+<circle x="25.4" y="21.59" radius="1.27" width="0.127" layer="21"/>
+<circle x="2.54" y="21.59" radius="1.27" width="0.127" layer="21"/>
+<circle x="2.54" y="19.05" radius="1.27" width="0.127" layer="21"/>
+<circle x="13.716" y="27.94" radius="7.62" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="9.906" y2="0" width="0.127" layer="21"/>
+<wire x1="9.906" y1="0.254" x2="9.906" y2="0" width="0.127" layer="21"/>
+<wire x1="12.446" y1="0" x2="12.446" y2="0.254" width="0.127" layer="21"/>
+<wire x1="14.986" y1="0.254" x2="14.986" y2="0" width="0.127" layer="21"/>
+<wire x1="17.526" y1="0.254" x2="17.526" y2="0" width="0.127" layer="21"/>
+<wire x1="9.906" y1="0" x2="17.526" y2="0" width="0.127" layer="21"/>
+<wire x1="17.526" y1="0" x2="27.432" y2="0" width="0.127" layer="21"/>
+<wire x1="27.432" y1="0" x2="27.432" y2="42.164" width="0.127" layer="21"/>
+<wire x1="27.432" y1="42.164" x2="0" y2="42.164" width="0.127" layer="21"/>
+<wire x1="0" y1="42.164" x2="0" y2="0" width="0.127" layer="21"/>
+<hole x="5.08" y="38.862" drill="2.2"/>
+<hole x="22.3012" y="38.862" drill="2.2"/>
+<text x="13.97" y="36.83" size="1.27" layer="21" align="bottom-center">GAS SENSOR
+MODULE</text>
+<text x="13.97" y="26.67" size="2.54" layer="21" align="bottom-center">&gt;VALUE</text>
+<text x="22.86" y="21.59" size="1.27" layer="21" rot="R180">TP2</text>
+<text x="22.86" y="19.05" size="1.27" layer="21" rot="R180">TP1</text>
+<text x="7.62" y="19.05" size="1.27" layer="21" rot="R180">TP3</text>
+<text x="7.62" y="21.59" size="1.27" layer="21" rot="R180">TP4</text>
+<text x="1.27" y="34.29" size="1.27" layer="21" rot="R270">PARALLAX</text>
+<pad name="P$1" x="2.54" y="21.59" drill="0.8"/>
+<pad name="P$2" x="2.54" y="19.05" drill="0.8"/>
+<pad name="P$3" x="25.4" y="21.59" drill="0.8"/>
+<pad name="P$4" x="25.4" y="19.05" drill="0.8"/>
+</package>
 </packages>
 <symbols>
 <symbol name="SHARP_DUST_SENSOR">
@@ -392,6 +441,35 @@ Humidity Sensor</text>
 <wire x1="-5.08" y1="10.16" x2="-5.08" y2="-5.08" width="0.254" layer="94"/>
 <text x="-3.81" y="5.08" size="1.4224" layer="94">5V SUSD
 Volt-Reg</text>
+</symbol>
+<symbol name="BATTERY">
+<wire x1="0" y1="-7.62" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="0" width="0.254" layer="94"/>
+<pin name="+" x="-5.08" y="0" length="point" rot="R270"/>
+<pin name="-" x="7.62" y="0" length="point" rot="R270"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="7.62" y2="0" width="0.254" layer="94"/>
+<text x="-5.08" y="2.54" size="1.27" layer="94" rot="R90">&gt;NAME</text>
+<text x="-2.54" y="2.54" size="1.27" layer="94" rot="R90">&gt;VALUE</text>
+</symbol>
+<symbol name="PARALLAX_GSM_BOARD">
+<pin name="ALR" x="-5.08" y="-10.16" length="middle" rot="R90"/>
+<pin name="HSW" x="-2.54" y="-10.16" length="middle" rot="R90"/>
+<pin name="+5V" x="0" y="-10.16" length="middle" direction="pwr" rot="R90"/>
+<pin name="GND" x="2.54" y="-10.16" length="middle" direction="pwr" rot="R90"/>
+<pin name="TP1" x="12.7" y="5.08" length="middle" direction="out" rot="R180"/>
+<pin name="TP2" x="12.7" y="7.62" length="middle" direction="out" rot="R180"/>
+<pin name="TP3" x="-15.24" y="5.08" length="middle" direction="out"/>
+<pin name="TP4" x="-15.24" y="7.62" length="middle" direction="out"/>
+<wire x1="-10.16" y1="-5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-5.08" x2="7.62" y2="20.32" width="0.254" layer="94"/>
+<wire x1="7.62" y1="20.32" x2="-10.16" y2="20.32" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="20.32" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<text x="-1.27" y="17.78" size="1.778" layer="94" align="bottom-center">&gt;NAME</text>
+<text x="-1.27" y="12.7" size="1.778" layer="94" align="bottom-center">Gas Sensor
+Module</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -562,6 +640,46 @@ Typical efficiency of over 90%</description>
 <connect gate="G$1" pin="GND" pad="GND"/>
 <connect gate="G$1" pin="VIN" pad="VIN"/>
 <connect gate="G$1" pin="VOUT" pad="VOUT"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BATTERY_WITH_PCB_HOLES">
+<description>&lt;h2&gt;Battery&lt;/h2&gt;
+Displays where to drill holes to secure wires.</description>
+<gates>
+<gate name="G$1" symbol="BATTERY" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BATTERY_WITH_WIRE_HOLES">
+<connects>
+<connect gate="G$1" pin="+" pad="VCC"/>
+<connect gate="G$1" pin="-" pad="GND"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CO">
+<gates>
+<gate name="G$1" symbol="PARALLAX_GSM_BOARD" x="2.54" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="GSM_PARALLAX">
+<connects>
+<connect gate="G$1" pin="+5V" pad="+5V"/>
+<connect gate="G$1" pin="ALR" pad="ALR"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="HSW" pad="HSW"/>
+<connect gate="G$1" pin="TP1" pad="P$1"/>
+<connect gate="G$1" pin="TP2" pad="P$2"/>
+<connect gate="G$1" pin="TP3" pad="P$3"/>
+<connect gate="G$1" pin="TP4" pad="P$4"/>
 </connects>
 <technologies>
 <technology name=""/>

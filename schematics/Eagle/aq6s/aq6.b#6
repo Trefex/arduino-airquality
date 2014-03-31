@@ -91,38 +91,38 @@
 <hole x="3.81" y="6.35" drill="1.3"/>
 </package>
 <package name="ARDUINO_FIO">
-<pad name="P$1" x="-10.16" y="2.54" drill="0.8"/>
-<pad name="P$2" x="-10.16" y="0" drill="0.8"/>
-<pad name="P$3" x="-10.16" y="-2.54" drill="0.8"/>
-<pad name="P$4" x="-10.16" y="-5.08" drill="0.8"/>
-<pad name="P$5" x="-10.16" y="-7.62" drill="0.8"/>
-<pad name="P$6" x="-10.16" y="-10.16" drill="0.8"/>
-<pad name="P$7" x="-10.16" y="-12.7" drill="0.8"/>
-<pad name="P$8" x="-10.16" y="-15.24" drill="0.8"/>
-<pad name="P$9" x="-10.16" y="-17.78" drill="0.8"/>
-<pad name="P$10" x="-10.16" y="-20.32" drill="0.8"/>
-<pad name="P$11" x="-10.16" y="-22.86" drill="0.8"/>
-<pad name="P$12" x="-10.16" y="-25.4" drill="0.8"/>
-<pad name="P$13" x="-10.16" y="-27.94" drill="0.8"/>
-<pad name="P$14" x="-10.16" y="-30.48" drill="0.8"/>
-<pad name="P$15" x="12.7" y="2.54" drill="0.8"/>
-<pad name="P$16" x="12.7" y="0" drill="0.8"/>
-<pad name="P$17" x="12.7" y="-2.54" drill="0.8"/>
-<pad name="P$18" x="12.7" y="-5.08" drill="0.8"/>
-<pad name="P$19" x="12.7" y="-7.62" drill="0.8"/>
-<pad name="P$20" x="12.7" y="-10.16" drill="0.8"/>
-<pad name="P$21" x="12.7" y="-12.7" drill="0.8"/>
-<pad name="P$22" x="12.7" y="-15.24" drill="0.8"/>
-<pad name="P$23" x="12.7" y="-17.78" drill="0.8"/>
-<pad name="P$24" x="12.7" y="-20.32" drill="0.8"/>
-<pad name="P$25" x="12.7" y="-22.86" drill="0.8"/>
-<pad name="P$26" x="12.7" y="-25.4" drill="0.8"/>
-<pad name="P$27" x="12.7" y="-27.94" drill="0.8"/>
-<pad name="P$28" x="12.7" y="-30.48" drill="0.8"/>
-<pad name="P$29" x="-2.54" y="7.62" drill="0.8"/>
-<pad name="P$30" x="-2.54" y="10.16" drill="0.8"/>
-<pad name="P$31" x="5.08" y="10.16" drill="0.8"/>
-<pad name="P$32" x="5.08" y="7.62" drill="0.8"/>
+<pad name="3V3" x="-10.16" y="2.54" drill="0.8"/>
+<pad name="GND" x="-10.16" y="0" drill="0.8"/>
+<pad name="D2" x="-10.16" y="-2.54" drill="0.8"/>
+<pad name="D3*" x="-10.16" y="-5.08" drill="0.8"/>
+<pad name="D4" x="-10.16" y="-7.62" drill="0.8"/>
+<pad name="D5*" x="-10.16" y="-10.16" drill="0.8"/>
+<pad name="D6*" x="-10.16" y="-12.7" drill="0.8"/>
+<pad name="D7" x="-10.16" y="-15.24" drill="0.8"/>
+<pad name="D8" x="-10.16" y="-17.78" drill="0.8"/>
+<pad name="D9*" x="-10.16" y="-20.32" drill="0.8"/>
+<pad name="D10" x="-10.16" y="-22.86" drill="0.8"/>
+<pad name="D11*" x="-10.16" y="-25.4" drill="0.8"/>
+<pad name="D12" x="-10.16" y="-27.94" drill="0.8"/>
+<pad name="D13" x="-10.16" y="-30.48" drill="0.8"/>
+<pad name="GND@E" x="12.7" y="2.54" drill="0.8"/>
+<pad name="AREF" x="12.7" y="0" drill="0.8"/>
+<pad name="3V3@E" x="12.7" y="-2.54" drill="0.8"/>
+<pad name="RXI" x="12.7" y="-5.08" drill="0.8"/>
+<pad name="TXO" x="12.7" y="-7.62" drill="0.8"/>
+<pad name="DTR" x="12.7" y="-10.16" drill="0.8"/>
+<pad name="A0" x="12.7" y="-12.7" drill="0.8"/>
+<pad name="A1" x="12.7" y="-15.24" drill="0.8"/>
+<pad name="A2" x="12.7" y="-17.78" drill="0.8"/>
+<pad name="A3" x="12.7" y="-20.32" drill="0.8"/>
+<pad name="A4" x="12.7" y="-22.86" drill="0.8"/>
+<pad name="A5" x="12.7" y="-25.4" drill="0.8"/>
+<pad name="A6" x="12.7" y="-27.94" drill="0.8"/>
+<pad name="A7" x="12.7" y="-30.48" drill="0.8"/>
+<pad name="DTR@N" x="-2.54" y="7.62" drill="0.8"/>
+<pad name="CTS" x="-2.54" y="10.16" drill="0.8"/>
+<pad name="+SW" x="5.08" y="10.16" drill="0.8"/>
+<pad name="-SW" x="5.08" y="7.62" drill="0.8"/>
 <wire x1="-10.795" y1="-31.115" x2="13.335" y2="-31.115" width="0.127" layer="21"/>
 <wire x1="13.335" y1="-31.115" x2="13.335" y2="12.7" width="0.127" layer="21"/>
 <wire x1="13.335" y1="12.7" x2="13.97" y2="12.7" width="0.127" layer="21"/>
@@ -161,6 +161,56 @@ Fio</text>
 <text x="0" y="3.81" size="2.54" layer="21" align="center">Var.
 volt.
 reg.</text>
+</package>
+<package name="ADAFRUIT_GPS_V3">
+<pad name="3V3" x="2.54" y="2.54" drill="0.8"/>
+<pad name="EN" x="5.08" y="2.54" drill="0.8"/>
+<pad name="VBAT" x="7.62" y="2.54" drill="0.8"/>
+<pad name="FIX" x="10.16" y="2.54" drill="0.8"/>
+<pad name="TX" x="12.7" y="2.54" drill="0.8"/>
+<pad name="RX" x="15.24" y="2.54" drill="0.8"/>
+<pad name="GND" x="17.78" y="2.54" drill="0.8"/>
+<pad name="VIN" x="20.32" y="2.54" drill="0.8"/>
+<pad name="PPS" x="22.86" y="2.54" drill="0.8"/>
+<hole x="2.54" y="31.75" drill="2"/>
+<hole x="22.86" y="31.75" drill="2"/>
+<wire x1="22.86" y1="34.29" x2="2.54" y2="34.29" width="0.127" layer="21"/>
+<wire x1="2.54" y1="34.29" x2="0" y2="31.75" width="0.127" layer="21" curve="90"/>
+<wire x1="0" y1="31.75" x2="0" y2="2.54" width="0.127" layer="21"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="0.127" layer="21" curve="90"/>
+<wire x1="2.54" y1="0" x2="22.86" y2="0" width="0.127" layer="21"/>
+<wire x1="22.86" y1="0" x2="25.4" y2="2.54" width="0.127" layer="21" curve="90"/>
+<wire x1="25.4" y1="2.54" x2="25.4" y2="31.75" width="0.127" layer="21"/>
+<wire x1="25.4" y1="31.75" x2="22.86" y2="34.29" width="0.127" layer="21" curve="90"/>
+<wire x1="3.81" y1="8.89" x2="20.32" y2="8.89" width="0.127" layer="21"/>
+<wire x1="20.32" y1="8.89" x2="20.32" y2="25.4" width="0.127" layer="21"/>
+<wire x1="20.32" y1="25.4" x2="3.81" y2="25.4" width="0.127" layer="21"/>
+<wire x1="3.81" y1="25.4" x2="3.81" y2="8.89" width="0.127" layer="21"/>
+<circle x="19.05" y="27.94" radius="1.27" width="0.127" layer="21"/>
+</package>
+<package name="SPARKFUN_OPENLOG">
+<pad name="GRN" x="1.27" y="1.27" drill="0.8"/>
+<pad name="RXI" x="3.81" y="1.27" drill="0.8"/>
+<pad name="TXO" x="6.35" y="1.27" drill="0.8"/>
+<pad name="VCC" x="8.89" y="1.27" drill="0.8"/>
+<pad name="GND" x="11.43" y="1.27" drill="0.8"/>
+<pad name="BLK" x="13.97" y="1.27" drill="0.8"/>
+<pad name="RST" x="3.81" y="17.78" drill="0.8" shape="square"/>
+<pad name="SCK" x="6.35" y="17.78" drill="0.8"/>
+<pad name="MOSI" x="8.89" y="17.78" drill="0.8"/>
+<pad name="MISO" x="11.43" y="17.78" drill="0.8"/>
+<wire x1="0" y1="0" x2="15.24" y2="0" width="0.127" layer="21"/>
+<wire x1="15.24" y1="0" x2="15.24" y2="19.05" width="0.127" layer="21"/>
+<wire x1="15.24" y1="19.05" x2="0" y2="19.05" width="0.127" layer="21"/>
+<wire x1="0" y1="19.05" x2="0" y2="0" width="0.127" layer="21"/>
+<wire x1="3.81" y1="5.08" x2="11.43" y2="5.08" width="0.127" layer="21"/>
+<wire x1="11.43" y1="5.08" x2="11.43" y2="12.7" width="0.127" layer="21"/>
+<wire x1="11.43" y1="12.7" x2="3.81" y2="12.7" width="0.127" layer="21"/>
+<wire x1="3.81" y1="12.7" x2="3.81" y2="5.08" width="0.127" layer="21"/>
+<text x="2.54" y="3.81" size="1.27" layer="21" rot="R90">Sparkfun</text>
+<text x="13.97" y="3.81" size="2.1844" layer="21" rot="R90">OpenLog</text>
+<rectangle x1="1.27" y1="16.51" x2="11.43" y2="19.05" layer="21"/>
+<text x="1.27" y="13.97" size="1.9304" layer="21">SD EXIT</text>
 </package>
 </packages>
 </library>
@@ -1477,13 +1527,15 @@ design rules under a new name.</description>
 <element name="C1" library="resistor" package="C050-025X075" value="220 uF" x="80.01" y="33.02"/>
 <element name="R1" library="resistor" package="0204/7" value="150Ω" x="81.28" y="38.1"/>
 <element name="U$3" library="air_quality_parts" package="POLOLU_VAR_VOLTAGE_REG" value="POLOLU_VAR_VOLTAGE_REG" x="81.28" y="50.8"/>
+<element name="U$4" library="air_quality_parts" package="ADAFRUIT_GPS_V3" value="ADAFRUIT_GPS_V3" x="-46.99" y="1.27"/>
+<element name="U$5" library="air_quality_parts" package="SPARKFUN_OPENLOG" value="SPARKFUN_OPENLOG" x="-63.5" y="1.27"/>
 </elements>
 <signals>
 <signal name="GND">
 <contactref element="U$1" pad="P$2"/>
+<contactref element="U$1" pad="P$4"/>
 <contactref element="C1" pad="2"/>
 <contactref element="U$3" pad="P$3"/>
-<contactref element="U$1" pad="P$4"/>
 <wire x1="82.55" y1="33.02" x2="82.55" y2="44.45" width="0" layer="19" extent="1-1"/>
 <wire x1="88.9" y1="33.02" x2="82.55" y2="33.02" width="0" layer="19" extent="1-1"/>
 <wire x1="88.9" y1="27.94" x2="88.9" y2="33.02" width="0" layer="19" extent="1-1"/>
@@ -1504,18 +1556,50 @@ design rules under a new name.</description>
 </signal>
 <signal name="N$1">
 <contactref element="U$1" pad="P$3"/>
-<contactref element="U$2" pad="P$12"/>
+<contactref element="U$2" pad="D11*"/>
 <wire x1="38.1" y1="30.48" x2="88.9" y2="30.48" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$4">
-<contactref element="U$2" pad="P$1"/>
+<signal name="3V3">
+<contactref element="U$2" pad="3V3"/>
 <contactref element="U$3" pad="P$2"/>
+<contactref element="U$4" pad="VIN"/>
+<contactref element="U$5" pad="VCC"/>
 <wire x1="10.16" y1="30.48" x2="80.01" y2="44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.67" y1="3.81" x2="10.16" y2="30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="-54.61" y1="2.54" x2="-26.67" y2="3.81" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
 <contactref element="U$1" pad="P$5"/>
-<contactref element="U$2" pad="P$27"/>
+<contactref element="U$2" pad="A6"/>
 <wire x1="40.64" y1="53.34" x2="88.9" y2="25.4" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<contactref element="U$4" pad="RX"/>
+<contactref element="U$2" pad="D3*"/>
+<wire x1="-31.75" y1="3.81" x2="17.78" y2="30.48" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$5">
+<contactref element="U$4" pad="TX"/>
+<contactref element="U$2" pad="D2"/>
+<wire x1="-34.29" y1="3.81" x2="15.24" y2="30.48" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$6">
+<contactref element="U$2" pad="GND"/>
+<contactref element="U$4" pad="GND"/>
+<contactref element="U$5" pad="GND"/>
+<wire x1="-29.21" y1="3.81" x2="-52.07" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="12.7" y1="30.48" x2="-29.21" y2="3.81" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$7">
+<contactref element="U$2" pad="D8"/>
+</signal>
+<signal name="N$9">
+<contactref element="U$5" pad="TXO"/>
+<contactref element="U$2" pad="D6*"/>
+<wire x1="-57.15" y1="2.54" x2="25.4" y2="30.48" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$8">
+<contactref element="U$2" pad="D7"/>
 </signal>
 </signals>
 </board>

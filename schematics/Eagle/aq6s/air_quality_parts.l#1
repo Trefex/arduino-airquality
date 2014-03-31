@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -311,6 +311,57 @@ MODULE</text>
 <pad name="P$3" x="25.4" y="21.59" drill="0.8"/>
 <pad name="P$4" x="25.4" y="19.05" drill="0.8"/>
 </package>
+<package name="BMP085">
+<pad name="VIN" x="2.54" y="2.54" drill="0.8"/>
+<pad name="3VO" x="5.08" y="2.54" drill="0.8"/>
+<pad name="SCL" x="7.62" y="2.54" drill="0.8"/>
+<pad name="SDA" x="10.16" y="2.54" drill="0.8"/>
+<pad name="XCLR" x="12.7" y="2.54" drill="0.8"/>
+<pad name="EOC" x="15.24" y="2.54" drill="0.8"/>
+<pad name="GND" x="17.78" y="2.54" drill="0.8"/>
+<wire x1="17.78" y1="0" x2="2.54" y2="0" width="0.127" layer="21"/>
+<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="21" curve="-90"/>
+<wire x1="0" y1="2.54" x2="0" y2="17.78" width="0.127" layer="21"/>
+<wire x1="17.78" y1="0" x2="20.32" y2="2.54" width="0.127" layer="21" curve="90"/>
+<wire x1="20.32" y1="2.54" x2="20.32" y2="17.78" width="0.127" layer="21"/>
+<wire x1="0" y1="17.78" x2="2.54" y2="20.32" width="0.127" layer="21" curve="-90"/>
+<wire x1="20.32" y1="17.78" x2="17.78" y2="20.32" width="0.127" layer="21" curve="90"/>
+<wire x1="17.78" y1="20.32" x2="2.54" y2="20.32" width="0.127" layer="21"/>
+<hole x="2.54" y="17.78" drill="2"/>
+<hole x="17.78" y="17.78" drill="2"/>
+<wire x1="7.62" y1="13.97" x2="7.62" y2="8.89" width="0.127" layer="21"/>
+<wire x1="7.62" y1="8.89" x2="12.7" y2="8.89" width="0.127" layer="21"/>
+<wire x1="12.7" y1="8.89" x2="12.7" y2="13.97" width="0.127" layer="21"/>
+<wire x1="12.7" y1="13.97" x2="7.62" y2="13.97" width="0.127" layer="21"/>
+<text x="6.35" y="15.24" size="1.016" layer="21">BMP0085
+PRESSURE
+SENSOR</text>
+</package>
+<package name="16DIP">
+<pad name="P$1" x="-5.08" y="7.62" drill="0.8"/>
+<pad name="P$2" x="-5.08" y="5.08" drill="0.8"/>
+<pad name="P$3" x="-5.08" y="2.54" drill="0.8"/>
+<pad name="P$4" x="-5.08" y="0" drill="0.8"/>
+<pad name="P$5" x="-5.08" y="-2.54" drill="0.8"/>
+<pad name="P$6" x="-5.08" y="-5.08" drill="0.8"/>
+<pad name="P$7" x="-5.08" y="-7.62" drill="0.8"/>
+<pad name="P$8" x="-5.08" y="-10.16" drill="0.8" shape="square"/>
+<pad name="P$9" x="2.54" y="-10.16" drill="0.8"/>
+<pad name="P$10" x="2.54" y="-7.62" drill="0.8"/>
+<pad name="P$11" x="2.54" y="-5.08" drill="0.8"/>
+<pad name="P$12" x="2.54" y="-2.54" drill="0.8"/>
+<pad name="P$13" x="2.54" y="0" drill="0.8"/>
+<pad name="P$14" x="2.54" y="2.54" drill="0.8"/>
+<pad name="P$15" x="2.54" y="5.08" drill="0.8"/>
+<pad name="P$16" x="2.54" y="7.62" drill="0.8"/>
+<wire x1="-6.35" y1="-11.43" x2="3.81" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-11.43" x2="3.81" y2="8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="8.89" x2="0" y2="8.89" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="8.89" x2="-6.35" y2="8.89" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="8.89" x2="-6.35" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="7.62" x2="-2.54" y2="8.89" width="0.127" layer="21" curve="-90"/>
+<wire x1="0" y1="8.89" x2="-1.27" y2="7.62" width="0.127" layer="21" curve="-90"/>
+</package>
 </packages>
 <symbols>
 <symbol name="SHARP_DUST_SENSOR">
@@ -470,6 +521,61 @@ Volt-Reg</text>
 <text x="-1.27" y="17.78" size="1.778" layer="94" align="bottom-center">&gt;NAME</text>
 <text x="-1.27" y="12.7" size="1.778" layer="94" align="bottom-center">Gas Sensor
 Module</text>
+</symbol>
+<symbol name="BMP085">
+<pin name="VIN" x="-5.08" y="-7.62" length="middle" direction="pwr" rot="R90"/>
+<pin name="3VO" x="-2.54" y="-7.62" length="middle" direction="pwr" rot="R90"/>
+<pin name="SCL" x="0" y="-7.62" length="middle" rot="R90"/>
+<pin name="SDA" x="2.54" y="-7.62" length="middle" rot="R90"/>
+<pin name="XCLR" x="5.08" y="-7.62" length="middle" rot="R90"/>
+<pin name="EOC" x="7.62" y="-7.62" length="middle" rot="R90"/>
+<pin name="GND" x="10.16" y="-7.62" length="middle" direction="pwr" rot="R90"/>
+<wire x1="-7.62" y1="-2.54" x2="12.7" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-2.54" x2="12.7" y2="17.78" width="0.254" layer="94"/>
+<wire x1="12.7" y1="17.78" x2="-7.62" y2="17.78" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="17.78" x2="-7.62" y2="-2.54" width="0.254" layer="94"/>
+<text x="-5.08" y="5.08" size="1.778" layer="94">BMP085
+Temperature
+&amp; Pressure
+Sensor</text>
+</symbol>
+<symbol name="M74HC595B1">
+<pin name="QB" x="10.16" y="7.62" length="middle" rot="R180"/>
+<pin name="QC" x="10.16" y="5.08" length="middle" rot="R180"/>
+<pin name="QD" x="10.16" y="2.54" length="middle" rot="R180"/>
+<pin name="QE" x="10.16" y="0" length="middle" rot="R180"/>
+<pin name="QF" x="10.16" y="-2.54" length="middle" rot="R180"/>
+<pin name="QG" x="10.16" y="-5.08" length="middle" rot="R180"/>
+<pin name="QH" x="10.16" y="-7.62" length="middle" rot="R180"/>
+<pin name="GND" x="-17.78" y="7.62" length="middle"/>
+<pin name="QH'" x="10.16" y="-10.16" length="middle" rot="R180"/>
+<pin name="SCLR" x="-17.78" y="17.78" length="middle"/>
+<pin name="SCK" x="-17.78" y="15.24" length="middle"/>
+<pin name="RCK" x="-17.78" y="20.32" length="middle"/>
+<pin name="G" x="-17.78" y="22.86" length="middle"/>
+<pin name="SI" x="-17.78" y="10.16" length="middle"/>
+<pin name="QA" x="10.16" y="10.16" length="middle" rot="R180"/>
+<wire x1="-12.7" y1="12.7" x2="-11.43" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-11.43" y1="12.7" x2="-5.08" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="12.7" x2="5.08" y2="12.7" width="0.254" layer="94"/>
+<wire x1="5.08" y1="12.7" x2="5.08" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-12.7" x2="-12.7" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="-12.7" x2="-12.7" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="13.97" x2="-12.7" y2="19.05" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="19.05" x2="-5.08" y2="19.05" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="19.05" x2="-5.08" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="12.7" x2="-2.54" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="25.4" x2="-12.7" y2="25.4" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="25.4" x2="-12.7" y2="19.05" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="12.7" x2="-2.54" y2="13.97" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="13.97" x2="-1.27" y2="13.97" width="0.254" layer="94"/>
+<wire x1="-1.27" y1="13.97" x2="-1.27" y2="25.4" width="0.254" layer="94"/>
+<wire x1="-11.43" y1="12.7" x2="-11.43" y2="13.97" width="0.254" layer="94"/>
+<wire x1="-11.43" y1="13.97" x2="-12.7" y2="13.97" width="0.254" layer="94"/>
+<text x="-7.62" y="-11.43" size="1.778" layer="94" rot="R90">MULTIPLEXER</text>
+<text x="-1.27" y="-11.43" size="1.778" layer="94" rot="R90">8BIT-SHIFT REG.
+M74HC595B1</text>
+<pin name="VCC" x="-17.78" y="5.08" length="middle"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -670,7 +776,67 @@ Displays where to drill holes to secure wires.</description>
 <gate name="G$1" symbol="PARALLAX_GSM_BOARD" x="2.54" y="-5.08"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="GSM_PARALLAX">
+<connects>
+<connect gate="G$1" pin="+5V" pad="+5V"/>
+<connect gate="G$1" pin="ALR" pad="ALR"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="HSW" pad="HSW"/>
+<connect gate="G$1" pin="TP1" pad="P$1"/>
+<connect gate="G$1" pin="TP2" pad="P$2"/>
+<connect gate="G$1" pin="TP3" pad="P$3"/>
+<connect gate="G$1" pin="TP4" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BMP085">
+<gates>
+<gate name="G$1" symbol="BMP085" x="-2.54" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="BMP085">
+<connects>
+<connect gate="G$1" pin="3VO" pad="3VO"/>
+<connect gate="G$1" pin="EOC" pad="EOC"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VIN" pad="VIN"/>
+<connect gate="G$1" pin="XCLR" pad="XCLR"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="M74HC595B1">
+<gates>
+<gate name="G$1" symbol="M74HC595B1" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="16DIP">
+<connects>
+<connect gate="G$1" pin="G" pad="P$13"/>
+<connect gate="G$1" pin="GND" pad="P$8"/>
+<connect gate="G$1" pin="QA" pad="P$15"/>
+<connect gate="G$1" pin="QB" pad="P$1"/>
+<connect gate="G$1" pin="QC" pad="P$2"/>
+<connect gate="G$1" pin="QD" pad="P$3"/>
+<connect gate="G$1" pin="QE" pad="P$4"/>
+<connect gate="G$1" pin="QF" pad="P$5"/>
+<connect gate="G$1" pin="QG" pad="P$6"/>
+<connect gate="G$1" pin="QH" pad="P$7"/>
+<connect gate="G$1" pin="QH'" pad="P$9"/>
+<connect gate="G$1" pin="RCK" pad="P$12"/>
+<connect gate="G$1" pin="SCK" pad="P$11"/>
+<connect gate="G$1" pin="SCLR" pad="P$10"/>
+<connect gate="G$1" pin="SI" pad="P$14"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>

@@ -284,6 +284,92 @@ Volt-Reg</text>
 <text x="3.175" y="7.62" size="1.27" layer="21" align="bottom-center">&gt;NAME</text>
 <text x="3.175" y="3.81" size="1.27" layer="21" align="bottom-center">&gt;VALUE</text>
 </package>
+<package name="GSM_PARALLAX">
+<pad name="ALR" x="9.906" y="3.81" drill="0.8"/>
+<pad name="HSW" x="12.446" y="3.81" drill="0.8"/>
+<pad name="+5V" x="14.986" y="3.81" drill="0.8"/>
+<pad name="GND" x="17.526" y="3.81" drill="0.8"/>
+<circle x="25.4" y="19.05" radius="1.27" width="0.127" layer="21"/>
+<circle x="25.4" y="21.59" radius="1.27" width="0.127" layer="21"/>
+<circle x="2.54" y="21.59" radius="1.27" width="0.127" layer="21"/>
+<circle x="2.54" y="19.05" radius="1.27" width="0.127" layer="21"/>
+<circle x="13.716" y="27.94" radius="7.62" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="9.906" y2="0" width="0.127" layer="21"/>
+<wire x1="9.906" y1="0.254" x2="9.906" y2="0" width="0.127" layer="21"/>
+<wire x1="12.446" y1="0" x2="12.446" y2="0.254" width="0.127" layer="21"/>
+<wire x1="14.986" y1="0.254" x2="14.986" y2="0" width="0.127" layer="21"/>
+<wire x1="17.526" y1="0.254" x2="17.526" y2="0" width="0.127" layer="21"/>
+<wire x1="9.906" y1="0" x2="17.526" y2="0" width="0.127" layer="21"/>
+<wire x1="17.526" y1="0" x2="27.432" y2="0" width="0.127" layer="21"/>
+<wire x1="27.432" y1="0" x2="27.432" y2="42.164" width="0.127" layer="21"/>
+<wire x1="27.432" y1="42.164" x2="0" y2="42.164" width="0.127" layer="21"/>
+<wire x1="0" y1="42.164" x2="0" y2="0" width="0.127" layer="21"/>
+<hole x="5.08" y="38.862" drill="2.2"/>
+<hole x="22.3012" y="38.862" drill="2.2"/>
+<text x="13.97" y="36.83" size="1.27" layer="21" align="bottom-center">GAS SENSOR
+MODULE</text>
+<text x="13.97" y="26.67" size="2.54" layer="21" align="bottom-center">&gt;VALUE</text>
+<text x="22.86" y="21.59" size="1.27" layer="21" rot="R180">TP2</text>
+<text x="22.86" y="19.05" size="1.27" layer="21" rot="R180">TP1</text>
+<text x="7.62" y="19.05" size="1.27" layer="21" rot="R180">TP3</text>
+<text x="7.62" y="21.59" size="1.27" layer="21" rot="R180">TP4</text>
+<text x="1.27" y="34.29" size="1.27" layer="21" rot="R270">PARALLAX</text>
+<pad name="P$1" x="2.54" y="21.59" drill="0.8"/>
+<pad name="P$2" x="2.54" y="19.05" drill="0.8"/>
+<pad name="P$3" x="25.4" y="21.59" drill="0.8"/>
+<pad name="P$4" x="25.4" y="19.05" drill="0.8"/>
+</package>
+<package name="BMP085">
+<pad name="VIN" x="2.54" y="2.54" drill="0.8"/>
+<pad name="3VO" x="5.08" y="2.54" drill="0.8"/>
+<pad name="SCL" x="7.62" y="2.54" drill="0.8"/>
+<pad name="SDA" x="10.16" y="2.54" drill="0.8"/>
+<pad name="XCLR" x="12.7" y="2.54" drill="0.8"/>
+<pad name="EOC" x="15.24" y="2.54" drill="0.8"/>
+<pad name="GND" x="17.78" y="2.54" drill="0.8"/>
+<wire x1="17.78" y1="0" x2="2.54" y2="0" width="0.127" layer="21"/>
+<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="21" curve="-90"/>
+<wire x1="0" y1="2.54" x2="0" y2="17.78" width="0.127" layer="21"/>
+<wire x1="17.78" y1="0" x2="20.32" y2="2.54" width="0.127" layer="21" curve="90"/>
+<wire x1="20.32" y1="2.54" x2="20.32" y2="17.78" width="0.127" layer="21"/>
+<wire x1="0" y1="17.78" x2="2.54" y2="20.32" width="0.127" layer="21" curve="-90"/>
+<wire x1="20.32" y1="17.78" x2="17.78" y2="20.32" width="0.127" layer="21" curve="90"/>
+<wire x1="17.78" y1="20.32" x2="2.54" y2="20.32" width="0.127" layer="21"/>
+<hole x="2.54" y="17.78" drill="2"/>
+<hole x="17.78" y="17.78" drill="2"/>
+<wire x1="7.62" y1="13.97" x2="7.62" y2="8.89" width="0.127" layer="21"/>
+<wire x1="7.62" y1="8.89" x2="12.7" y2="8.89" width="0.127" layer="21"/>
+<wire x1="12.7" y1="8.89" x2="12.7" y2="13.97" width="0.127" layer="21"/>
+<wire x1="12.7" y1="13.97" x2="7.62" y2="13.97" width="0.127" layer="21"/>
+<text x="6.35" y="15.24" size="1.016" layer="21">BMP0085
+PRESSURE
+SENSOR</text>
+</package>
+<package name="16DIP">
+<pad name="P$1" x="-5.08" y="7.62" drill="0.8"/>
+<pad name="P$2" x="-5.08" y="5.08" drill="0.8"/>
+<pad name="P$3" x="-5.08" y="2.54" drill="0.8"/>
+<pad name="P$4" x="-5.08" y="0" drill="0.8"/>
+<pad name="P$5" x="-5.08" y="-2.54" drill="0.8"/>
+<pad name="P$6" x="-5.08" y="-5.08" drill="0.8"/>
+<pad name="P$7" x="-5.08" y="-7.62" drill="0.8"/>
+<pad name="P$8" x="-5.08" y="-10.16" drill="0.8" shape="square"/>
+<pad name="P$9" x="2.54" y="-10.16" drill="0.8"/>
+<pad name="P$10" x="2.54" y="-7.62" drill="0.8"/>
+<pad name="P$11" x="2.54" y="-5.08" drill="0.8"/>
+<pad name="P$12" x="2.54" y="-2.54" drill="0.8"/>
+<pad name="P$13" x="2.54" y="0" drill="0.8"/>
+<pad name="P$14" x="2.54" y="2.54" drill="0.8"/>
+<pad name="P$15" x="2.54" y="5.08" drill="0.8"/>
+<pad name="P$16" x="2.54" y="7.62" drill="0.8"/>
+<wire x1="-6.35" y1="-11.43" x2="3.81" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-11.43" x2="3.81" y2="8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="8.89" x2="0" y2="8.89" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="8.89" x2="-6.35" y2="8.89" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="8.89" x2="-6.35" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="7.62" x2="-2.54" y2="8.89" width="0.127" layer="21" curve="-90"/>
+<wire x1="0" y1="8.89" x2="-1.27" y2="7.62" width="0.127" layer="21" curve="-90"/>
+</package>
 </packages>
 </library>
 <library name="resistor">
@@ -1680,6 +1766,12 @@ design rules under a new name.</description>
 <element name="S1" library="switch" package="M9040P" value="" x="-111.76" y="5.08"/>
 <element name="S2" library="switch" package="M9040P" value="" x="-123.19" y="5.08"/>
 <element name="R2" library="resistor" package="0204/7" value="10KΩ" x="-121.92" y="-8.89"/>
+<element name="CO" library="air_quality_parts" package="GSM_PARALLAX" value="CO" x="-156.21" y="-8.89"/>
+<element name="U$8" library="air_quality_parts" package="BMP085" value="BMP085" x="-156.21" y="-30.48"/>
+<element name="R3" library="resistor" package="0204/7" value="10KΩ" x="-151.13" y="-34.29"/>
+<element name="R4" library="resistor" package="0204/7" value="4.7kΩ" x="-151.13" y="-38.1"/>
+<element name="U$9" library="air_quality_parts" package="16DIP" value="M74HC595B1" x="-161.29" y="-26.67"/>
+<element name="C2" library="resistor" package="C050-025X075" value="1 uF" x="-162.56" y="-43.18"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -1693,15 +1785,23 @@ design rules under a new name.</description>
 <contactref element="U$4" pad="GND"/>
 <contactref element="U$5" pad="GND"/>
 <contactref element="NPN" pad="3"/>
-<wire x1="82.55" y1="33.02" x2="82.55" y2="44.45" width="0" layer="19" extent="1-1"/>
+<contactref element="CO" pad="GND"/>
+<contactref element="U$8" pad="GND"/>
+<contactref element="C2" pad="1"/>
+<contactref element="R4" pad="1"/>
+<wire x1="-154.94" y1="-38.1" x2="-165.1" y2="-43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-138.43" y1="-27.94" x2="-154.94" y2="-38.1" width="0" layer="19" extent="1-1"/>
+<wire x1="-138.684" y1="-5.08" x2="-138.43" y2="-27.94" width="0" layer="19" extent="1-1"/>
+<wire x1="-81.28" y1="-3.81" x2="-138.684" y2="-5.08" width="0" layer="19" extent="1-1"/>
+<wire x1="-71.12" y1="7.62" x2="-81.28" y2="-3.81" width="0" layer="19" extent="1-1"/>
+<wire x1="-68.58" y1="7.62" x2="-71.12" y2="7.62" width="0" layer="19" extent="1-1"/>
+<wire x1="-52.07" y1="2.54" x2="-68.58" y2="7.62" width="0" layer="19" extent="1-1"/>
+<wire x1="-29.21" y1="3.81" x2="-52.07" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="12.7" y1="30.48" x2="-29.21" y2="3.81" width="0" layer="19" extent="1-1"/>
+<wire x1="82.55" y1="33.02" x2="12.7" y2="30.48" width="0" layer="19" extent="1-1"/>
 <wire x1="88.9" y1="33.02" x2="82.55" y2="33.02" width="0" layer="19" extent="1-1"/>
 <wire x1="88.9" y1="27.94" x2="88.9" y2="33.02" width="0" layer="19" extent="1-1"/>
-<wire x1="12.7" y1="30.48" x2="82.55" y2="33.02" width="0" layer="19" extent="1-1"/>
-<wire x1="-29.21" y1="3.81" x2="12.7" y2="30.48" width="0" layer="19" extent="1-1"/>
-<wire x1="-52.07" y1="2.54" x2="-29.21" y2="3.81" width="0" layer="19" extent="1-1"/>
-<wire x1="-68.58" y1="7.62" x2="-52.07" y2="2.54" width="0" layer="19" extent="1-1"/>
-<wire x1="-71.12" y1="7.62" x2="-68.58" y2="7.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-81.28" y1="-3.81" x2="-71.12" y2="7.62" width="0" layer="19" extent="1-1"/>
+<wire x1="82.55" y1="44.45" x2="82.55" y2="33.02" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="5V">
 <contactref element="U$1" pad="P$6"/>
@@ -1729,11 +1829,19 @@ design rules under a new name.</description>
 <contactref element="U$5" pad="VCC"/>
 <contactref element="U$6" pad="VCC@2"/>
 <contactref element="U$6" pad="VCC"/>
-<wire x1="10.16" y1="30.48" x2="80.01" y2="44.45" width="0" layer="19" extent="1-1"/>
-<wire x1="-26.67" y1="3.81" x2="10.16" y2="30.48" width="0" layer="19" extent="1-1"/>
-<wire x1="-54.61" y1="2.54" x2="-26.67" y2="3.81" width="0" layer="19" extent="1-1"/>
-<wire x1="-68.58" y1="5.08" x2="-54.61" y2="2.54" width="0" layer="19" extent="1-1"/>
-<wire x1="-71.12" y1="5.08" x2="-68.58" y2="5.08" width="0" layer="19" extent="1-1"/>
+<contactref element="U$8" pad="VIN"/>
+<contactref element="U$9" pad="P$10"/>
+<contactref element="C2" pad="2"/>
+<contactref element="U$9" pad="P$16"/>
+<wire x1="-158.75" y1="-34.29" x2="-160.02" y2="-43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-153.67" y1="-27.94" x2="-158.75" y2="-34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="-158.75" y1="-19.05" x2="-153.67" y2="-27.94" width="0" layer="19" extent="1-1"/>
+<wire x1="-71.12" y1="5.08" x2="-153.67" y2="-27.94" width="0" layer="19" extent="1-1"/>
+<wire x1="-68.58" y1="5.08" x2="-71.12" y2="5.08" width="0" layer="19" extent="1-1"/>
+<wire x1="-54.61" y1="2.54" x2="-68.58" y2="5.08" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.67" y1="3.81" x2="-54.61" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="10.16" y1="30.48" x2="-26.67" y2="3.81" width="0" layer="19" extent="1-1"/>
+<wire x1="80.01" y1="44.45" x2="10.16" y2="30.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
 <contactref element="U$1" pad="P$5"/>
@@ -1808,6 +1916,53 @@ design rules under a new name.</description>
 </signal>
 <signal name="N$18">
 <contactref element="U$7" pad="VOUT"/>
+<contactref element="CO" pad="+5V"/>
+<contactref element="R3" pad="1"/>
+<wire x1="-141.224" y1="-5.08" x2="-154.94" y2="-34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="-79.375" y1="7.62" x2="-141.224" y2="-5.08" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$19">
+<contactref element="CO" pad="HSW"/>
+</signal>
+<signal name="N$20">
+<contactref element="CO" pad="P$1"/>
+<contactref element="U$2" pad="A7"/>
+<wire x1="43.18" y1="53.34" x2="-153.67" y2="12.7" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="3VO">
+<contactref element="U$8" pad="3VO"/>
+</signal>
+<signal name="N$23">
+<contactref element="U$8" pad="SCL"/>
+<contactref element="U$2" pad="A5"/>
+<wire x1="38.1" y1="53.34" x2="-148.59" y2="-27.94" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$24">
+<contactref element="U$8" pad="SDA"/>
+<contactref element="U$2" pad="A4"/>
+<wire x1="35.56" y1="53.34" x2="-146.05" y2="-27.94" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$21">
+<contactref element="R3" pad="2"/>
+<contactref element="R4" pad="2"/>
+<contactref element="U$2" pad="A1"/>
+<wire x1="-147.32" y1="-34.29" x2="-147.32" y2="-38.1" width="0" layer="19" extent="1-1"/>
+<wire x1="27.94" y1="53.34" x2="-147.32" y2="-34.29" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$22">
+<contactref element="U$2" pad="A2"/>
+<contactref element="U$9" pad="P$14"/>
+<wire x1="30.48" y1="53.34" x2="-158.75" y2="-24.13" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$26">
+<contactref element="U$9" pad="P$11"/>
+<contactref element="U$2" pad="D9*"/>
+<wire x1="33.02" y1="30.48" x2="-158.75" y2="-31.75" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$27">
+<contactref element="U$9" pad="P$12"/>
+<contactref element="U$2" pad="D10"/>
+<wire x1="35.56" y1="30.48" x2="-158.75" y2="-29.21" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
