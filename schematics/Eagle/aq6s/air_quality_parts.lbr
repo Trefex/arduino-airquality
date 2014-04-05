@@ -228,39 +228,39 @@ Humidity
 <wire x1="1.27" y1="-2.54" x2="3.175" y2="-2.54" width="0.127" layer="21"/>
 </package>
 <package name="5V_SUSD_VOLT_REG">
-<wire x1="-3.81" y1="-6.35" x2="5.08" y2="-6.35" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-6.35" x2="5.08" y2="5.715" width="0.127" layer="21"/>
-<wire x1="5.08" y1="5.715" x2="-3.81" y2="5.715" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="5.715" x2="-3.81" y2="-6.35" width="0.127" layer="21"/>
-<pad name="GND" x="0.635" y="-5.08" drill="0.8" shape="square"/>
-<pad name="VIN" x="-1.905" y="-5.08" drill="0.8"/>
-<pad name="VOUT" x="3.175" y="-5.08" drill="0.8"/>
-<text x="-3.175" y="1.905" size="1.27" layer="21">5V SUSD
+<wire x1="0" y1="0" x2="8.89" y2="0" width="0.127" layer="21"/>
+<wire x1="8.89" y1="0" x2="8.89" y2="12.065" width="0.127" layer="21"/>
+<wire x1="8.89" y1="12.065" x2="0" y2="12.065" width="0.127" layer="21"/>
+<wire x1="0" y1="12.065" x2="0" y2="0" width="0.127" layer="21"/>
+<pad name="GND" x="4.445" y="1.27" drill="0.8" shape="square"/>
+<pad name="VIN" x="1.905" y="1.27" drill="0.8"/>
+<pad name="VOUT" x="6.985" y="1.27" drill="0.8"/>
+<text x="0.635" y="8.255" size="1.27" layer="21">5V SUSD
 Volt-Reg</text>
-<wire x1="-3.175" y1="1.27" x2="-1.27" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="-1.27" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="-1.27" x2="-3.175" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-3.175" y1="-1.27" x2="-3.175" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="-0.635" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-1.905" x2="2.54" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="-0.635" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.81" x2="-0.635" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-3.81" x2="-0.635" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-2.54" x2="-2.54" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="0" y1="-2.54" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="-3.81" x2="1.905" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="1.905" y1="-3.81" x2="1.905" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="1.905" y1="-2.54" x2="0" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="4.445" y1="0.635" x2="3.81" y2="0.635" width="0.127" layer="21"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="3.81" y1="-0.635" x2="4.445" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="4.445" y1="-0.635" x2="4.445" y2="0.635" width="0.127" layer="21"/>
-<circle x="3.81" y="-3.175" radius="0.635" width="0.127" layer="21"/>
-<text x="-2.54" y="-6.35" size="1.016" layer="21" rot="R270">VIN</text>
-<text x="0" y="-6.35" size="1.016" layer="21" rot="R270">GND</text>
-<text x="2.54" y="-6.35" size="1.016" layer="21" rot="R270">5VOUT</text>
+<wire x1="0.635" y1="7.62" x2="2.54" y2="7.62" width="0.127" layer="21"/>
+<wire x1="2.54" y1="7.62" x2="2.54" y2="5.08" width="0.127" layer="21"/>
+<wire x1="2.54" y1="5.08" x2="0.635" y2="5.08" width="0.127" layer="21"/>
+<wire x1="0.635" y1="5.08" x2="0.635" y2="7.62" width="0.127" layer="21"/>
+<wire x1="3.175" y1="7.62" x2="3.175" y2="4.445" width="0.127" layer="21"/>
+<wire x1="3.175" y1="4.445" x2="6.35" y2="4.445" width="0.127" layer="21"/>
+<wire x1="6.35" y1="4.445" x2="6.35" y2="7.62" width="0.127" layer="21"/>
+<wire x1="6.35" y1="7.62" x2="3.175" y2="7.62" width="0.127" layer="21"/>
+<wire x1="1.27" y1="3.81" x2="1.27" y2="2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="2.54" x2="3.175" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.175" y1="2.54" x2="3.175" y2="3.81" width="0.127" layer="21"/>
+<wire x1="3.175" y1="3.81" x2="1.27" y2="3.81" width="0.127" layer="21"/>
+<wire x1="3.81" y1="3.81" x2="3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.81" y1="2.54" x2="5.715" y2="2.54" width="0.127" layer="21"/>
+<wire x1="5.715" y1="2.54" x2="5.715" y2="3.81" width="0.127" layer="21"/>
+<wire x1="5.715" y1="3.81" x2="3.81" y2="3.81" width="0.127" layer="21"/>
+<wire x1="8.255" y1="6.985" x2="7.62" y2="6.985" width="0.127" layer="21"/>
+<wire x1="7.62" y1="6.985" x2="7.62" y2="5.715" width="0.127" layer="21"/>
+<wire x1="7.62" y1="5.715" x2="8.255" y2="5.715" width="0.127" layer="21"/>
+<wire x1="8.255" y1="5.715" x2="8.255" y2="6.985" width="0.127" layer="21"/>
+<circle x="7.62" y="3.175" radius="0.635" width="0.127" layer="21"/>
+<text x="1.27" y="0" size="1.016" layer="21" rot="R270">VIN</text>
+<text x="3.81" y="0" size="1.016" layer="21" rot="R270">GND</text>
+<text x="6.35" y="0" size="1.016" layer="21" rot="R270">5VOUT</text>
 </package>
 <package name="BATTERY_WITH_WIRE_HOLES">
 <hole x="1.27" y="6.35" drill="2"/>
@@ -306,10 +306,10 @@ MODULE</text>
 <text x="7.62" y="19.05" size="1.27" layer="21" rot="R180">TP3</text>
 <text x="7.62" y="21.59" size="1.27" layer="21" rot="R180">TP4</text>
 <text x="1.27" y="34.29" size="1.27" layer="21" rot="R270">PARALLAX</text>
-<pad name="P$1" x="2.54" y="21.59" drill="0.8"/>
-<pad name="P$2" x="2.54" y="19.05" drill="0.8"/>
-<pad name="P$3" x="25.4" y="21.59" drill="0.8"/>
-<pad name="P$4" x="25.4" y="19.05" drill="0.8"/>
+<pad name="TP4" x="2.54" y="21.59" drill="0.8"/>
+<pad name="TP3" x="2.54" y="19.05" drill="0.8"/>
+<pad name="TP2" x="25.4" y="21.59" drill="0.8"/>
+<pad name="TP1" x="25.4" y="19.05" drill="0.8"/>
 </package>
 <package name="BMP085">
 <pad name="VIN" x="2.54" y="2.54" drill="0.8"/>
@@ -361,6 +361,57 @@ SENSOR</text>
 <wire x1="-6.35" y1="8.89" x2="-6.35" y2="-11.43" width="0.127" layer="21"/>
 <wire x1="-1.27" y1="7.62" x2="-2.54" y2="8.89" width="0.127" layer="21" curve="-90"/>
 <wire x1="0" y1="8.89" x2="-1.27" y2="7.62" width="0.127" layer="21" curve="-90"/>
+</package>
+<package name="SWITCH">
+<pad name="P$1" x="0" y="-1.27" drill="0.8" shape="offset" rot="R270"/>
+<pad name="P$2" x="2.54" y="-1.27" drill="0.8" shape="offset" rot="R270"/>
+<pad name="P$3" x="5.08" y="-1.27" drill="0.8" shape="offset" rot="R270"/>
+<hole x="2.54" y="-5.08" drill="2"/>
+<hole x="5.08" y="-5.08" drill="2"/>
+<hole x="2.54" y="-8.89" drill="2"/>
+<hole x="5.08" y="-8.89" drill="2"/>
+<wire x1="5.08" y1="-8.89" x2="6.35" y2="-7.62" width="0.254" layer="21" curve="90"/>
+<wire x1="6.35" y1="-7.62" x2="6.35" y2="-6.35" width="0.254" layer="21"/>
+<wire x1="6.35" y1="-6.35" x2="5.08" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<wire x1="2.54" y1="-8.89" x2="3.81" y2="-7.62" width="0.254" layer="21" curve="90"/>
+<wire x1="3.81" y1="-7.62" x2="3.81" y2="-6.35" width="0.254" layer="21"/>
+<wire x1="3.81" y1="-6.35" x2="2.54" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<hole x="0" y="-5.08" drill="2"/>
+<hole x="0" y="-8.89" drill="2"/>
+<wire x1="0" y1="-8.89" x2="1.27" y2="-7.62" width="0.254" layer="21" curve="90"/>
+<wire x1="1.27" y1="-7.62" x2="1.27" y2="-6.35" width="0.254" layer="21"/>
+<wire x1="1.27" y1="-6.35" x2="0" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<wire x1="0" y1="-1.27" x2="-1.27" y2="-2.54" width="0.254" layer="21" curve="90"/>
+<wire x1="-1.27" y1="-2.54" x2="-1.27" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="-1.27" y1="-3.81" x2="0" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<wire x1="2.54" y1="-1.27" x2="1.27" y2="-2.54" width="0.254" layer="21" curve="90"/>
+<wire x1="1.27" y1="-2.54" x2="1.27" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="1.27" y1="-3.81" x2="2.54" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<wire x1="5.08" y1="-1.27" x2="3.81" y2="-2.54" width="0.254" layer="21" curve="90"/>
+<wire x1="3.81" y1="-2.54" x2="3.81" y2="-3.81" width="0.254" layer="21"/>
+<wire x1="3.81" y1="-3.81" x2="5.08" y2="-5.08" width="0.254" layer="21" curve="90"/>
+<wire x1="-1.905" y1="0" x2="6.985" y2="0" width="0.127" layer="21"/>
+<wire x1="6.985" y1="0" x2="6.985" y2="-10.16" width="0.127" layer="21"/>
+<wire x1="6.985" y1="-10.16" x2="-1.905" y2="-10.16" width="0.127" layer="21"/>
+<wire x1="-1.905" y1="-10.16" x2="-1.905" y2="0" width="0.127" layer="21"/>
+<wire x1="1.778" y1="-0.508" x2="3.302" y2="-0.508" width="0.127" layer="21"/>
+<wire x1="3.302" y1="-0.508" x2="3.302" y2="-3.302" width="0.127" layer="21"/>
+<wire x1="3.302" y1="-3.302" x2="1.778" y2="-3.302" width="0.127" layer="21"/>
+<wire x1="1.778" y1="-3.302" x2="1.778" y2="-0.508" width="0.127" layer="21"/>
+</package>
+<package name="NPN">
+<pad name="E" x="-1.905" y="0" drill="0.8"/>
+<pad name="B" x="0" y="0" drill="0.8"/>
+<pad name="C" x="1.905" y="0" drill="0.8"/>
+<wire x1="-2.54" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-1.27" x2="3.175" y2="0" width="0.127" layer="21"/>
+<wire x1="3.175" y1="0" x2="0" y2="3.175" width="0.127" layer="21" curve="90"/>
+<wire x1="0" y1="3.175" x2="-3.175" y2="0" width="0.127" layer="21" curve="90"/>
+<wire x1="-3.175" y1="0" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
+<text x="-2.54" y="0.635" size="1.27" layer="21">E</text>
+<text x="-0.635" y="0.635" size="1.27" layer="21">B</text>
+<text x="1.27" y="0.635" size="1.27" layer="21">C</text>
+<text x="0" y="-2.54" size="1.27" layer="21" align="bottom-center">&gt;NAME</text>
 </package>
 </packages>
 <symbols>
@@ -577,6 +628,32 @@ Sensor</text>
 M74HC595B1</text>
 <pin name="VCC" x="-17.78" y="5.08" length="middle"/>
 </symbol>
+<symbol name="SWITCH">
+<pin name="SIG_OUT" x="5.08" y="0" visible="off" length="short" rot="R180"/>
+<pin name="SIG1" x="-5.08" y="-2.54" length="point"/>
+<pin name="SIG2" x="-5.08" y="2.54" length="point"/>
+<wire x1="2.54" y1="0" x2="-5.08" y2="-2.54" width="0.254" layer="94" style="shortdash"/>
+<wire x1="2.54" y1="0" x2="-5.08" y2="2.54" width="0.254" layer="94" style="shortdash"/>
+</symbol>
+<symbol name="NPN">
+<pin name="B" x="-3.175" y="0" length="point" rot="R180"/>
+<pin name="C" x="2.54" y="-3.81" length="point"/>
+<pin name="E" x="2.54" y="3.81" length="point"/>
+<wire x1="0" y1="-1.905" x2="0" y2="-0.635" width="1.016" layer="94"/>
+<wire x1="0" y1="-0.635" x2="0" y2="0" width="1.016" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="0.635" width="1.016" layer="94"/>
+<wire x1="0" y1="0.635" x2="0" y2="1.905" width="1.016" layer="94"/>
+<wire x1="0" y1="-0.635" x2="2.54" y2="-3.175" width="0.254" layer="94"/>
+<wire x1="0" y1="0.635" x2="2.54" y2="3.175" width="0.254" layer="94"/>
+<polygon width="0.254" layer="94">
+<vertex x="2.54" y="3.175"/>
+<vertex x="1.27" y="3.175"/>
+<vertex x="2.54" y="1.905"/>
+</polygon>
+<wire x1="0" y1="0" x2="-3.175" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-3.81" x2="2.54" y2="-3.175" width="0.254" layer="94"/>
+<wire x1="2.54" y1="3.175" x2="2.54" y2="3.81" width="0.254" layer="94"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="SHARP_DUST_SENSOR">
@@ -738,7 +815,7 @@ Has two sets of 3-wires running from breakout board.</description>
 Produces 5 V from input voltages between 2.7 V and 11.8 V&lt;br&gt;
 Typical efficiency of over 90%</description>
 <gates>
-<gate name="G$1" symbol="5V_SUSD_VOLT_REG" x="5.08" y="-5.08"/>
+<gate name="G$1" symbol="5V_SUSD_VOLT_REG" x="5.08" y="5.08"/>
 </gates>
 <devices>
 <device name="" package="5V_SUSD_VOLT_REG">
@@ -782,10 +859,10 @@ Displays where to drill holes to secure wires.</description>
 <connect gate="G$1" pin="ALR" pad="ALR"/>
 <connect gate="G$1" pin="GND" pad="GND"/>
 <connect gate="G$1" pin="HSW" pad="HSW"/>
-<connect gate="G$1" pin="TP1" pad="P$1"/>
-<connect gate="G$1" pin="TP2" pad="P$2"/>
-<connect gate="G$1" pin="TP3" pad="P$3"/>
-<connect gate="G$1" pin="TP4" pad="P$4"/>
+<connect gate="G$1" pin="TP1" pad="TP1"/>
+<connect gate="G$1" pin="TP2" pad="TP2"/>
+<connect gate="G$1" pin="TP3" pad="TP3"/>
+<connect gate="G$1" pin="TP4" pad="TP4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -837,6 +914,41 @@ Displays where to drill holes to secure wires.</description>
 <connect gate="G$1" pin="SCLR" pad="P$10"/>
 <connect gate="G$1" pin="SI" pad="P$14"/>
 <connect gate="G$1" pin="VCC" pad="P$16"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SWITCH">
+<gates>
+<gate name="G$1" symbol="SWITCH" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SWITCH">
+<connects>
+<connect gate="G$1" pin="SIG1" pad="P$1"/>
+<connect gate="G$1" pin="SIG2" pad="P$3"/>
+<connect gate="G$1" pin="SIG_OUT" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="NPN">
+<description>&lt;h2&gt;NPN S9014&lt;/h2&gt;</description>
+<gates>
+<gate name="G$1" symbol="NPN" x="5.08" y="0"/>
+</gates>
+<devices>
+<device name="" package="NPN">
+<connects>
+<connect gate="G$1" pin="B" pad="B"/>
+<connect gate="G$1" pin="C" pad="C"/>
+<connect gate="G$1" pin="E" pad="E"/>
 </connects>
 <technologies>
 <technology name=""/>
