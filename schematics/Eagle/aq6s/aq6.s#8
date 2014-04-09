@@ -297,39 +297,39 @@ Humidity
 <wire x1="1.27" y1="-2.54" x2="3.175" y2="-2.54" width="0.127" layer="21"/>
 </package>
 <package name="5V_SUSD_VOLT_REG">
-<wire x1="-3.81" y1="-6.35" x2="5.08" y2="-6.35" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-6.35" x2="5.08" y2="5.715" width="0.127" layer="21"/>
-<wire x1="5.08" y1="5.715" x2="-3.81" y2="5.715" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="5.715" x2="-3.81" y2="-6.35" width="0.127" layer="21"/>
-<pad name="GND" x="0.635" y="-5.08" drill="0.8" shape="square"/>
-<pad name="VIN" x="-1.905" y="-5.08" drill="0.8"/>
-<pad name="VOUT" x="3.175" y="-5.08" drill="0.8"/>
-<text x="-3.175" y="1.905" size="1.27" layer="21">5V SUSD
+<wire x1="0" y1="0" x2="8.89" y2="0" width="0.127" layer="21"/>
+<wire x1="8.89" y1="0" x2="8.89" y2="12.065" width="0.127" layer="21"/>
+<wire x1="8.89" y1="12.065" x2="0" y2="12.065" width="0.127" layer="21"/>
+<wire x1="0" y1="12.065" x2="0" y2="0" width="0.127" layer="21"/>
+<pad name="GND" x="4.445" y="1.27" drill="0.8" shape="square"/>
+<pad name="VIN" x="1.905" y="1.27" drill="0.8"/>
+<pad name="VOUT" x="6.985" y="1.27" drill="0.8"/>
+<text x="0.635" y="8.255" size="1.27" layer="21">5V SUSD
 Volt-Reg</text>
-<wire x1="-3.175" y1="1.27" x2="-1.27" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="1.27" x2="-1.27" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-1.27" y1="-1.27" x2="-3.175" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-3.175" y1="-1.27" x2="-3.175" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="-0.635" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-1.905" x2="2.54" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="-0.635" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.81" x2="-0.635" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-3.81" x2="-0.635" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-2.54" x2="-2.54" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="0" y1="-2.54" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="-3.81" x2="1.905" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="1.905" y1="-3.81" x2="1.905" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="1.905" y1="-2.54" x2="0" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="4.445" y1="0.635" x2="3.81" y2="0.635" width="0.127" layer="21"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="3.81" y1="-0.635" x2="4.445" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="4.445" y1="-0.635" x2="4.445" y2="0.635" width="0.127" layer="21"/>
-<circle x="3.81" y="-3.175" radius="0.635" width="0.127" layer="21"/>
-<text x="-2.54" y="-6.35" size="1.016" layer="21" rot="R270">VIN</text>
-<text x="0" y="-6.35" size="1.016" layer="21" rot="R270">GND</text>
-<text x="2.54" y="-6.35" size="1.016" layer="21" rot="R270">5VOUT</text>
+<wire x1="0.635" y1="7.62" x2="2.54" y2="7.62" width="0.127" layer="21"/>
+<wire x1="2.54" y1="7.62" x2="2.54" y2="5.08" width="0.127" layer="21"/>
+<wire x1="2.54" y1="5.08" x2="0.635" y2="5.08" width="0.127" layer="21"/>
+<wire x1="0.635" y1="5.08" x2="0.635" y2="7.62" width="0.127" layer="21"/>
+<wire x1="3.175" y1="7.62" x2="3.175" y2="4.445" width="0.127" layer="21"/>
+<wire x1="3.175" y1="4.445" x2="6.35" y2="4.445" width="0.127" layer="21"/>
+<wire x1="6.35" y1="4.445" x2="6.35" y2="7.62" width="0.127" layer="21"/>
+<wire x1="6.35" y1="7.62" x2="3.175" y2="7.62" width="0.127" layer="21"/>
+<wire x1="1.27" y1="3.81" x2="1.27" y2="2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="2.54" x2="3.175" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.175" y1="2.54" x2="3.175" y2="3.81" width="0.127" layer="21"/>
+<wire x1="3.175" y1="3.81" x2="1.27" y2="3.81" width="0.127" layer="21"/>
+<wire x1="3.81" y1="3.81" x2="3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.81" y1="2.54" x2="5.715" y2="2.54" width="0.127" layer="21"/>
+<wire x1="5.715" y1="2.54" x2="5.715" y2="3.81" width="0.127" layer="21"/>
+<wire x1="5.715" y1="3.81" x2="3.81" y2="3.81" width="0.127" layer="21"/>
+<wire x1="8.255" y1="6.985" x2="7.62" y2="6.985" width="0.127" layer="21"/>
+<wire x1="7.62" y1="6.985" x2="7.62" y2="5.715" width="0.127" layer="21"/>
+<wire x1="7.62" y1="5.715" x2="8.255" y2="5.715" width="0.127" layer="21"/>
+<wire x1="8.255" y1="5.715" x2="8.255" y2="6.985" width="0.127" layer="21"/>
+<circle x="7.62" y="3.175" radius="0.635" width="0.127" layer="21"/>
+<text x="1.27" y="0" size="1.016" layer="21" rot="R270">VIN</text>
+<text x="3.81" y="0" size="1.016" layer="21" rot="R270">GND</text>
+<text x="6.35" y="0" size="1.016" layer="21" rot="R270">5VOUT</text>
 </package>
 <package name="BATTERY_WITH_WIRE_HOLES">
 <hole x="1.27" y="6.35" drill="2"/>
@@ -533,7 +533,8 @@ SENSOR</text>
 <pin name="VIN" x="0" y="-12.7" length="middle" rot="R90"/>
 <pin name="GND" x="2.54" y="-12.7" length="middle" rot="R90"/>
 <pin name="VOUT" x="5.08" y="-12.7" length="middle" rot="R90"/>
-<text x="-2.54" y="6.35" size="1.016" layer="94">Var. Voltage
+<text x="-2.54" y="3.81" size="1.4224" layer="94">Variable
+voltage
 regulator</text>
 </symbol>
 <symbol name="ADAFRUIT_GPS_V3">
@@ -850,7 +851,7 @@ Has two sets of 3-wires running from breakout board.</description>
 Produces 5 V from input voltages between 2.7 V and 11.8 V&lt;br&gt;
 Typical efficiency of over 90%</description>
 <gates>
-<gate name="G$1" symbol="5V_SUSD_VOLT_REG" x="5.08" y="-5.08"/>
+<gate name="G$1" symbol="5V_SUSD_VOLT_REG" x="5.08" y="5.08"/>
 </gates>
 <devices>
 <device name="" package="5V_SUSD_VOLT_REG">
@@ -9350,12 +9351,6 @@ Source: http://www.osram.convergy.de/</description>
 <junction x="91.44" y="8.89"/>
 </segment>
 </net>
-<net name="N$19" class="0">
-<segment>
-<pinref part="CO" gate="G$1" pin="HSW"/>
-<wire x1="93.98" y1="12.7" x2="93.98" y2="3.81" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$20" class="0">
 <segment>
 <pinref part="CO" gate="G$1" pin="TP1"/>
@@ -9475,6 +9470,13 @@ Source: http://www.osram.convergy.de/</description>
 <pinref part="U$11" gate="G$1" pin="SIG1"/>
 <wire x1="138.43" y1="15.24" x2="139.7" y2="16.51" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="16.51" x2="139.7" y2="17.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="CO" gate="G$1" pin="HSW"/>
+<pinref part="NPN" gate="G$1" pin="C"/>
+<wire x1="93.98" y1="3.81" x2="93.98" y2="11.43" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
