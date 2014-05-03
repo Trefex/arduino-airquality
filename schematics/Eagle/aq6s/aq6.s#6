@@ -375,10 +375,10 @@ MODULE</text>
 <text x="7.62" y="19.05" size="1.27" layer="21" rot="R180">TP3</text>
 <text x="7.62" y="21.59" size="1.27" layer="21" rot="R180">TP4</text>
 <text x="1.27" y="34.29" size="1.27" layer="21" rot="R270">PARALLAX</text>
-<pad name="P$1" x="2.54" y="21.59" drill="0.8"/>
-<pad name="P$2" x="2.54" y="19.05" drill="0.8"/>
-<pad name="P$3" x="25.4" y="21.59" drill="0.8"/>
-<pad name="P$4" x="25.4" y="19.05" drill="0.8"/>
+<pad name="TP4" x="2.54" y="21.59" drill="0.8"/>
+<pad name="TP3" x="2.54" y="19.05" drill="0.8"/>
+<pad name="TP2" x="25.4" y="21.59" drill="0.8"/>
+<pad name="TP1" x="25.4" y="19.05" drill="0.8"/>
 </package>
 <package name="BMP085">
 <pad name="VIN" x="2.54" y="2.54" drill="0.8"/>
@@ -928,10 +928,10 @@ Displays where to drill holes to secure wires.</description>
 <connect gate="G$1" pin="ALR" pad="ALR"/>
 <connect gate="G$1" pin="GND" pad="GND"/>
 <connect gate="G$1" pin="HSW" pad="HSW"/>
-<connect gate="G$1" pin="TP1" pad="P$1"/>
-<connect gate="G$1" pin="TP2" pad="P$2"/>
-<connect gate="G$1" pin="TP3" pad="P$3"/>
-<connect gate="G$1" pin="TP4" pad="P$4"/>
+<connect gate="G$1" pin="TP1" pad="TP1"/>
+<connect gate="G$1" pin="TP2" pad="TP2"/>
+<connect gate="G$1" pin="TP3" pad="TP3"/>
+<connect gate="G$1" pin="TP4" pad="TP4"/>
 </connects>
 <technologies>
 <technology name=""/>

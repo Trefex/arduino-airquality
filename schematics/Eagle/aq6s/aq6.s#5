@@ -7577,7 +7577,7 @@ Source: http://www.osram.convergy.de/</description>
 <part name="R5" library="resistor" deviceset="R-EU_" device="0204/7" value="220Ω"/>
 <part name="R6" library="resistor" deviceset="R-EU_" device="0204/7" value="220Ω"/>
 <part name="R7" library="resistor" deviceset="R-EU_" device="0204/7" value="220Ω"/>
-<part name="LED1" library="adafruit" deviceset="LED" device="5MM" value="GRN"/>
+<part name="GRN" library="adafruit" deviceset="LED" device="5MM"/>
 <part name="BLUE" library="adafruit" deviceset="LED" device="5MM"/>
 <part name="RED" library="adafruit" deviceset="LED" device="5MM"/>
 <part name="U$10" library="air_quality_parts" deviceset="SWITCH" device=""/>
@@ -7612,7 +7612,7 @@ Source: http://www.osram.convergy.de/</description>
 <instance part="R5" gate="G$1" x="-69.85" y="53.34"/>
 <instance part="R6" gate="G$1" x="-69.85" y="60.96"/>
 <instance part="R7" gate="G$1" x="-69.85" y="68.58"/>
-<instance part="LED1" gate="G$1" x="-78.74" y="53.34" rot="R270"/>
+<instance part="GRN" gate="G$1" x="-78.74" y="53.34" rot="R270"/>
 <instance part="BLUE" gate="G$1" x="-78.74" y="60.96" rot="R270"/>
 <instance part="RED" gate="G$1" x="-78.74" y="68.58" rot="R270"/>
 <instance part="U$10" gate="G$1" x="5.08" y="6.35"/>
@@ -7681,7 +7681,7 @@ Source: http://www.osram.convergy.de/</description>
 <label x="-16.51" y="39.37" size="1.778" layer="95" rot="R180"/>
 <pinref part="R4" gate="G$1" pin="1"/>
 <wire x1="68.58" y1="26.67" x2="68.58" y2="58.42" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="C"/>
+<pinref part="GRN" gate="G$1" pin="C"/>
 <pinref part="BLUE" gate="G$1" pin="C"/>
 <wire x1="-83.82" y1="53.34" x2="-83.82" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="RED" gate="G$1" pin="C"/>
@@ -8026,7 +8026,7 @@ Source: http://www.osram.convergy.de/</description>
 </net>
 <net name="N$32" class="0">
 <segment>
-<pinref part="LED1" gate="G$1" pin="A"/>
+<pinref part="GRN" gate="G$1" pin="A"/>
 <pinref part="R5" gate="G$1" pin="1"/>
 <wire x1="-74.93" y1="53.34" x2="-76.2" y2="53.34" width="0.1524" layer="91"/>
 </segment>

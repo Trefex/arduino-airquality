@@ -7966,9 +7966,9 @@ Source: http://www.osram.convergy.de/</description>
 <pinref part="U$9" gate="G$1" pin="SCK"/>
 <wire x1="-27.94" y1="48.26" x2="-13.97" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="-13.97" y1="48.26" x2="-13.97" y2="57.15" width="0.1524" layer="91"/>
-<wire x1="-13.97" y1="57.15" x2="38.1" y2="57.15" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="D9*"/>
-<wire x1="38.1" y1="57.15" x2="38.1" y2="52.07" width="0.1524" layer="91"/>
+<wire x1="-13.97" y1="57.15" x2="40.64" y2="57.15" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="D10*"/>
+<wire x1="40.64" y1="57.15" x2="40.64" y2="52.07" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$27" class="0">
@@ -7976,9 +7976,9 @@ Source: http://www.osram.convergy.de/</description>
 <pinref part="U$9" gate="G$1" pin="RCK"/>
 <wire x1="-27.94" y1="43.18" x2="-12.7" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="-12.7" y1="43.18" x2="-12.7" y2="57.785" width="0.1524" layer="91"/>
-<wire x1="-12.7" y1="57.785" x2="40.64" y2="57.785" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="D10*"/>
-<wire x1="40.64" y1="57.785" x2="40.64" y2="52.07" width="0.1524" layer="91"/>
+<wire x1="-12.7" y1="57.785" x2="38.1" y2="57.785" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="D9*"/>
+<wire x1="38.1" y1="57.785" x2="38.1" y2="52.07" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$28" class="0">
