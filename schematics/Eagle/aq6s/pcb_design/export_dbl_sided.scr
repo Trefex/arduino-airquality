@@ -1,0 +1,8 @@
+display all
+ratsnest
+display none
+display bottom pads vias
+export image bottom.png
+display none
+display top pads vias
+export image top.png
