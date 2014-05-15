@@ -33,15 +33,15 @@
 
 using namespace std;*/
 
-#define USE_OPENLOG // disable to remove logging
-#define USE_GPS // disable to remove GPS
+//#define USE_OPENLOG // disable to remove logging
+//#define USE_GPS // disable to remove GPS
 #define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
-#define GPSECHO false // put to true if you want to see raw GPS data flowing
+//#define GPSECHO false // put to true if you want to see raw GPS data flowing
 #define USE_HT // comment to remove Humidity and temperature sensor
-#define USE_CO // disable to remove CO sensor
-#define USE_DUST // disable to remove DUST sensor
-#define MUX // multiplexer/bit-shift register
+//#define USE_CO // disable to remove CO sensor
+//#define USE_DUST // disable to remove DUST sensor
+//#define MUX // multiplexer/bit-shift register
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
@@ -64,8 +64,8 @@ using namespace std;*/
 
 
 // Pin definitions
-#define HT_DATA_PIN 11 //D11 - Humidity/Temp sensor data
-#define HT_SCK_PIN 13  //D13 - Humidity/Temp sensor serial clock
+#define HT_DATA_PIN 5 //D5 - Humidity/Temp sensor data
+#define HT_SCK_PIN 4  //D4 - Humidity/Temp sensor serial clock
 
 #define DUST_RX_PIN A6  //A6 - Dust sensor (Analog 6)
 #define DUST_LED_PIN 12 //D12 - Dust sensor led
