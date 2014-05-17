@@ -34,13 +34,13 @@
 using namespace std;*/
 
 //#define USE_OPENLOG // disable to remove logging
-//#define USE_GPS // disable to remove GPS
+#define USE_GPS // disable to remove GPS
+#define GPSECHO false // put to true if you want to see raw GPS data flowing
 #define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
-//#define GPSECHO false // put to true if you want to see raw GPS data flowing
 #define USE_HT // comment to remove Humidity and temperature sensor
 //#define USE_CO // disable to remove CO sensor
-//#define USE_DUST // disable to remove DUST sensor
+#define USE_DUST // disable to remove DUST sensor
 //#define MUX // multiplexer/bit-shift register
 
 // Check which sensors are being used based on defines above
@@ -74,8 +74,8 @@ using namespace std;*/
 #define OPENLOG_TX_PIN 7  //D7 - Openlogger
 #define OPENLOG_RX_PIN 8  //D8 - Openlogger
 
-#define ADAGPS_RX_PIN 2 // D2 - GPS RX to Pin ADAGPS_RX_PIN
-#define ADAGPS_TX_PIN 3 // D3 - GPS TX to ADAGPS_TX_PIN
+#define ADAGPS_RX_PIN 3 // D3 - GPS RX to Pin ADAGPS_RX_PIN
+#define ADAGPS_TX_PIN 2 // D2 - GPS TX to ADAGPS_TX_PIN
 
 #define ACTIVE_MONOX_LED_PIN 4 // D4 - CO LED Pin
 #define ACTIVE_MONOX_PIN 5 // D5 - CO Switch Pin
@@ -217,6 +217,22 @@ void setup(){
     // Ask for firmware version
     GPSSerial.println(PMTK_Q_RELEASE);
   #endif
+}
+
+// converts lat/long from Adafruit
+// degree-minute format to decimal-degrees
+double convertDegMinToDecDeg (float degMin) {
+  double minutes = 0.0;
+  double decDeg = 0.0;
+ 
+  //get the minutes, fmod() requires double
+  minutes = fmod((double)degMin, 100.0);
+ 
+  //rebuild coordinates in decimal degrees
+  degMin = (int) ( degMin / 100 );
+  decDeg = degMin + ( minutes / 60 );
+ 
+  return decDeg;
 }
 
 void loop(){
@@ -470,21 +486,5 @@ void loop(){
 //  #endif
 //  //while(OpenLog.read() >= 0){;}
 //}
-
-// converts lat/long from Adafruit
-// degree-minute format to decimal-degrees
-double convertDegMinToDecDeg (float degMin) {
-  double minutes = 0.0;
-  double decDeg = 0.0;
- 
-  //get the minutes, fmod() requires double
-  minutes = fmod((double)degMin, 100.0);
- 
-  //rebuild coordinates in decimal degrees
-  degMin = (int) ( degMin / 100 );
-  decDeg = degMin + ( minutes / 60 );
- 
-  return decDeg;
-}
 
 

@@ -2970,9 +2970,10 @@ design rules under a new name.</description>
 <wire x1="8.255" y1="13.335" x2="8.255" y2="8.89" width="1.27" layer="1"/>
 <wire x1="73.66" y1="56.515" x2="65.405" y2="56.515" width="1.27" layer="16"/>
 <wire x1="65.405" y1="53.975" x2="73.66" y2="53.975" width="1.27" layer="16"/>
-<wire x1="75.819" y1="55.484" x2="73.66" y2="56.515" width="0" layer="19" extent="16-16"/>
+<wire x1="75.819" y1="55.484" x2="74.691" y2="55.484" width="1.27" layer="16"/>
+<wire x1="74.691" y1="55.484" x2="73.66" y2="56.515" width="1.27" layer="16"/>
+<wire x1="73.66" y1="53.975" x2="73.66" y2="56.515" width="1.27" layer="16"/>
 <wire x1="27.94" y1="2.54" x2="26.67" y2="1.27" width="0" layer="19" extent="16-16"/>
-<wire x1="65.405" y1="53.975" x2="65.405" y2="56.515" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="5V">
 <contactref element="U$1" pad="P$6"/>
@@ -3306,6 +3307,9 @@ design rules under a new name.</description>
 <wire x1="76.2" y1="27.305" x2="80.01" y2="27.305" width="1.27" layer="16"/>
 <wire x1="80.01" y1="27.305" x2="81.915" y2="25.4" width="1.27" layer="16"/>
 <wire x1="81.915" y1="25.4" x2="81.915" y2="23.495" width="1.27" layer="16"/>
+</signal>
+<signal name="N$24">
+<via x="36.195" y="58.42" extent="1-16" drill="0.6" shape="square"/>
 </signal>
 </signals>
 <errors>
