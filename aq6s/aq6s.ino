@@ -71,8 +71,8 @@ using namespace std;*/
 #define DUST_LED_PIN 12 //D12 - Dust sensor led
 
 #define OPENLOG_RST_PIN 6 //D6 - Openlogger
-#define OPENLOG_TX_PIN 7  //D7 - Openlogger
-#define OPENLOG_RX_PIN 8  //D8 - Openlogger
+#define OPENLOG_RX_PIN 7  //D7 - Openlogger
+#define OPENLOG_TX_PIN 8  //D8 - Openlogger
 
 #define ADAGPS_RX_PIN 3 // D3 - GPS RX to Pin ADAGPS_RX_PIN
 #define ADAGPS_TX_PIN 2 // D2 - GPS TX to ADAGPS_TX_PIN
@@ -96,7 +96,7 @@ using namespace std;*/
 #endif
 
 #ifdef USE_OPENLOG
-  SoftwareSerial OpenLog(OPENLOG_RX_PIN, OPENLOG_TX_PIN);  // RX, TX
+  SoftwareSerial OpenLog(OPENLOG_TX_PIN, OPENLOG_RX_PIN);  // TX, RX
 #endif
 
 #ifdef USE_BARO
@@ -356,7 +356,7 @@ void loop(){
       #endif
       
       #ifdef USE_HT
-        Serial.print("\nTemperature: "); Serial.print(temp_c); Serial.println(" [*C]");
+        Serial.print("Temperature: "); Serial.print(temp_c); Serial.println(" [*C]");
         Serial.print("Humidity: "); Serial.print(humid); Serial.println(" [%] RH");
       #endif
       
@@ -400,7 +400,9 @@ void loop(){
         //gpsReady = true;
         //break;
         //Serial.println("Before GPS.lastNMEA");
-        if (GPS.parse(GPS.lastNMEA())){   // this also sets the newNMEAreceived() flag to false
+        char * raw_gps;
+        raw_gps = GPS.lastNMEA();
+        if (GPS.parse(raw_gps)){   // this also sets the newNMEAreceived() flag to false
         //Serial.println("Before GPS fix");
           if (GPS.fix) {
             #ifdef DEBUG_ON 
@@ -410,7 +412,7 @@ void loop(){
                 Serial.print(GPS.seconds, DEC); Serial.print('.');
                 Serial.println(GPS.milliseconds);
                 Serial.print("Date: ");
-                Serial.print(GPS.day, DEC); Serial.print('/');
+                Serial.print(GPS.day); Serial.print('/');
                 Serial.print(GPS.month, DEC); Serial.print("/20");
                 Serial.println(GPS.year, DEC);
                 Serial.print("Fix: "); Serial.print((int)GPS.fix);
@@ -428,9 +430,10 @@ void loop(){
             #endif
           } else {
             #ifdef DEBUG_ON
-              Serial.print("No GPS fix achieved.");
+              Serial.println("No GPS fix achieved:");
             #endif
           }
+          Serial.println(raw_gps);
         }
       }
     }
