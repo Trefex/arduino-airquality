@@ -39,9 +39,9 @@ using namespace std;*/
 #define USE_BARO // disable to remove Barometric sensor
 #define DEBUG_ON // enable to output debugging information on normal Serial
 #define USE_HT // comment to remove Humidity and temperature sensor
-//#define USE_CO // disable to remove CO sensor
+#define USE_CO // disable to remove CO sensor
 #define USE_DUST // disable to remove DUST sensor
-//#define MUX // multiplexer/bit-shift register
+#define LEDS     // use Red, Blue, Green leds for indication
 
 // Check which sensors are being used based on defines above
 #ifdef USE_BARO
@@ -62,7 +62,6 @@ using namespace std;*/
   #include "COS_MQ7.h"
 #endif
 
-
 // Pin definitions
 #define HT_DATA_PIN 5 //D5 - Humidity/Temp sensor data
 #define HT_SCK_PIN 4  //D4 - Humidity/Temp sensor serial clock
@@ -77,14 +76,14 @@ using namespace std;*/
 #define ADAGPS_RX_PIN 3 // D3 - GPS RX to Pin ADAGPS_RX_PIN
 #define ADAGPS_TX_PIN 2 // D2 - GPS TX to ADAGPS_TX_PIN
 
-#define ACTIVE_MONOX_LED_PIN 4 // D4 - CO LED Pin
-#define ACTIVE_MONOX_PIN 5 // D5 - CO Switch Pin
+#define ACTIVE_MONOX_LED_PIN 10 // CO LED Pin (No led in place in D10 currently)
+#define ACTIVE_MONOX_PIN 11 // D5 - CO Switch Pin
 #define READ_MONOX_PIN A7 // CO Read Pin
-#define READ_COPSV_PIN A1 // CO Power Supply Voltage
+#define READ_COPSV_PIN A3 // CO Power Supply Voltage
 
-#define MUX_DATA_PIN A2   // MUX-SI/14
-#define MUX_LATCH_PIN 10 // MUX-RCK/12
-#define MUX_CLOCK_PIN 9 // MUX-SCK/11
+#define RED_LED A0
+#define BLU_LED A1
+#define GRN_LED A2
 
 #ifdef USE_CO
   COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN, -1);
@@ -131,10 +130,11 @@ float dustDensity = 0;
 float temp_c = -99;
 float humid = -99;
 
-int co_voltage = 0;
+int co_state = -99;
+int co_voltage = -99;
+int co_reading = -99;
 
-int mux_int = 0;
-boolean mux_pulse = false;
+boolean led_pulse = false;
 
 float bmp_temp = 0;
 float bmp_pres = 0;
@@ -206,10 +206,10 @@ void setup(){
     BMP.begin();
   #endif
   
-  #ifdef MUX
-    pinMode(MUX_LATCH_PIN, OUTPUT);
-    pinMode(MUX_CLOCK_PIN, OUTPUT);
-    pinMode(MUX_DATA_PIN, OUTPUT);
+  #ifdef LEDS
+    pinMode(RED_LED, OUTPUT);
+    pinMode(BLU_LED, OUTPUT);
+    pinMode(GRN_LED, OUTPUT);
   #endif
 
   delay(1000);
@@ -284,10 +284,14 @@ void loop(){
     
     // Cycle Power of CO Sensor
     #ifdef USE_CO
-      co_voltage = -1;
       MQ7.Power_cycle();
+      co_state = MQ7.Get_state();
+      co_voltage = MQ7.Get_Voltage_reading();
+      co_reading = MQ7.Get_current_CO_reading();
+      
+      // this unblocks CO sensor from waiting for us to retrieve good measure value
       if(MQ7.Get_state() == 4) {
-       co_voltage = MQ7.Get_CO_reading();
+       co_reading = MQ7.Get_CO_reading();
       }
     #endif
     
@@ -335,7 +339,7 @@ void loop(){
       #endif
       
       #ifdef USE_CO
-        OpenLog.print(co_voltage); OpenLog.print(";");
+        OpenLog.print(co_state); OpenLog.print(";"); OpenLog.print(co_voltage); OpenLog.print(";"); OpenLog.print(co_reading); OpenLog.print(";");
       #endif
       
       OpenLog.print("\n");          
@@ -362,9 +366,9 @@ void loop(){
       
       #ifdef USE_CO
         Serial.print("\n");
-        Serial.print("CO Sensor State: "); Serial.println(MQ7.Get_state());
-        Serial.print("CO Voltage Reading: "); Serial.println(MQ7.Get_Voltage_reading());
-        Serial.print("CO Current Reading: "); Serial.println(MQ7.Get_current_CO_reading());
+        Serial.print("CO Sensor State: "); Serial.println(co_state);
+        Serial.print("CO Voltage Reading: "); Serial.println(co_voltage);
+        Serial.print("CO Current Reading: "); Serial.println(co_reading);
       #endif
     #endif
  // }
@@ -439,39 +443,34 @@ void loop(){
     }
   #endif
   
-  #ifdef MUX
+  #ifdef LEDS
+    // all leds off
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(BLU_LED, LOW);
+    digitalWrite(GRN_LED, LOW);
+  
     // display led status
     // we have two pulse stages to alternate leds and reduce current draw
-    if ( mux_pulse ) {
-      mux_int = 0;
-      mux_pulse = false;
+    if ( led_pulse ) {
+      led_pulse = false;
       
       // see if we have GPS fix
       if ( GPS.fix ) {
         // turn on blue led
-        mux_int += 2;
+        digitalWrite(BLU_LED, HIGH);
       }
     } else {
       // fio is on so turn on the green led
-      mux_int = 1;
-      mux_pulse = true;
+      digitalWrite(GRN_LED, HIGH);
+      led_pulse = true;
       
-      // see if the battery voltage is low (under 5 volts)
+      // see if the CO battery voltage is low (under 5 volts)
       if ( co_voltage < 500 ) {
         // turn on red led
-        mux_int += 4;
+        digitalWrite(RED_LED, HIGH);
       }      
     }
-    
-    // unlatch to update mux value and wait a bit
-    digitalWrite(MUX_LATCH_PIN, LOW);
-    delay(100);
-    // send the byte/int corresponding to pins on
-    shiftOut(MUX_DATA_PIN, MUX_CLOCK_PIN, MSBFIRST, mux_int);
-    // latch back up to turn on
-    digitalWrite(MUX_LATCH_PIN, HIGH);
-  
-    #endif
+  #endif
   
   
   // if millis() or timer wraps around, we'll just reset it
