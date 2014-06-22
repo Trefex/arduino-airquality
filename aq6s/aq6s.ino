@@ -8,6 +8,7 @@
  For Pin connections, please check the Blog or the github project page
  Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
  Changelog:
+   2014-Jun-22: Removed MUX, simplified LED display, OpenLog GPS conflict resolved?
    2014-Feb-09: Fixed OpenLog problems due to dust sensor
    2013-Dec-11: Added CO code through library addition
    2013-Dec-22: Added CO Sensor
@@ -33,7 +34,7 @@
 
 using namespace std;*/
 
-//#define USE_OPENLOG // disable to remove logging
+#define USE_OPENLOG // disable to remove logging
 #define USE_GPS // disable to remove GPS
 #define GPSECHO false // put to true if you want to see raw GPS data flowing
 #define USE_BARO // disable to remove Barometric sensor
@@ -129,6 +130,8 @@ float calcVoltage = 0;
 float dustDensity = 0;
 float temp_c = -99;
 float humid = -99;
+
+int mainLiPo_mV = -99;
 
 int co_state = -99;
 int co_voltage = -99;
@@ -240,6 +243,8 @@ void loop(){
   #ifdef DEBUG_ON
     Serial.println("\nBegining of loop");
   #endif
+  
+  mainLiPo_mV = readVcc();
 
   // Take measurement every two seconds
   // if (millis() - timer > 2000) { 
@@ -269,10 +274,6 @@ void loop(){
       // linear eqaution taken from http://www.howmuchsnow.com/arduino/airquality/
       // Chris Nafis (c) 2012
       dustDensity = (0.17 * calcVoltage - 0.1)*1000;
-      
-      //if(dustDensity < 0) {
-        //dustDensity = 0;
-      //}
     #endif
 
     // Get temperature
@@ -305,42 +306,54 @@ void loop(){
       OpenLog.print("<< ");
       #ifdef USE_GPS // If using GPS log data if a fix, otherwise write blanks
         if(GPS.fix) {
-          // print date time
-          OpenLog.print(GPS.day, DEC); OpenLog.print("/");
-          OpenLog.print(GPS.month, DEC); OpenLog.print("/20");
-          OpenLog.print(GPS.year, DEC); OpenLog.print(";");
+          // print date time (YYYY-MM-DD HH:MM:SS.00000)
+          OpenLog.print("20"); OpenLog.print(GPS.year, DEC); OpenLog.print("-");
+          OpenLog.print(GPS.month, DEC); OpenLog.print("-");
+          OpenLog.print(GPS.day, DEC); OpenLog.print(" ");
           OpenLog.print(GPS.hour, DEC); OpenLog.print(":");
           delay(15);
           OpenLog.print(GPS.minute, DEC); OpenLog.print(":");
-          OpenLog.print(GPS.seconds, DEC); OpenLog.print(";");
-          // print location
-          OpenLog.print(convertDegMinToDecDeg(GPS.latitude)); OpenLog.print(";"); OpenLog.print(GPS.lat); OpenLog.print(";"); 
-          OpenLog.print(convertDegMinToDecDeg(GPS.longitude)); OpenLog.print(";"); OpenLog.print(GPS.lon); OpenLog.print(";");
+          OpenLog.print(GPS.seconds, DEC); OpenLog.print(GPS.milliseconds); OpenLog.print(",");
+          
+          // print location (XX.XXXXXN, XX.XXXXXE)
+          OpenLog.print(convertDegMinToDecDeg(GPS.latitude)); OpenLog.print(GPS.lat); OpenLog.print(",");
+          OpenLog.print(convertDegMinToDecDeg(GPS.longitude)); OpenLog.print(GPS.lon); OpenLog.print(",");
+          
+          // Fix quality, speed, angle/direction of travel, altitude, satellites locked
+          OpenLog.print((int)GPS.fixquality); OpenLog.print(",");
+          OpenLog.print(GPS.speed); OpenLog.print(",");
+          OpenLog.print(GPS.angle); OpenLog.print(",");
+          OpenLog.print((int)GPS.satellites); OpenLog.print(",");
+          
         } else {
-          OpenLog.print(";;;;;;");
+          OpenLog.print(",,,,,,,");
         }
-      #else
-    
-      #ifdef_USE_DUST
+      #endif
+
+      #ifdef USE_DUST
         // Dust Values
-        OpenLog.print(dustDensity); OpenLog.print(";");
+        OpenLog.print(dustDensity); OpenLog.print(",");
         delay(15);
       #endif
       
       #ifdef USE_BARO
-         OpenLog.print(bmp_temp); OpenLog.print(";");
-         OpenLog.print(bmp_pres); OpenLog.print(";");
+         OpenLog.print(bmp_temp); OpenLog.print(",");
+         OpenLog.print(bmp_pres); OpenLog.print(",");
          delay(15);
       #endif
       
       #ifdef USE_HT
-        OpenLog.print(temp_c); OpenLog.print(";");
-        OpenLog.print(humid); OpenLog.print(";");
+        OpenLog.print(temp_c); OpenLog.print(",");
+        OpenLog.print(humid); OpenLog.print(",");
       #endif
       
       #ifdef USE_CO
-        OpenLog.print(co_state); OpenLog.print(";"); OpenLog.print(co_voltage); OpenLog.print(";"); OpenLog.print(co_reading); OpenLog.print(";");
+        OpenLog.print(co_state); OpenLog.print(",");
+        OpenLog.print(co_voltage); OpenLog.print(",");
+        OpenLog.print(co_reading); OpenLog.print(",");
       #endif
+      
+      OpenLog.print(mainLiPo_mV);
       
       OpenLog.print("\n");          
       delay(15);
@@ -370,6 +383,8 @@ void loop(){
         Serial.print("CO Voltage Reading: "); Serial.println(co_voltage);
         Serial.print("CO Current Reading: "); Serial.println(co_reading);
       #endif
+      // check arduino LiPo battery level
+      Serial.print("Main LiPo voltage: "); Serial.println(mainLiPo_mV);
     #endif
  // }
   
@@ -409,7 +424,7 @@ void loop(){
         if (GPS.parse(raw_gps)){   // this also sets the newNMEAreceived() flag to false
         //Serial.println("Before GPS fix");
           if (GPS.fix) {
-            #ifdef DEBUG_ON 
+            #ifdef DEBUG_ON
                 Serial.print("\nTime: ");
                 Serial.print(GPS.hour, DEC); Serial.print(':');
                 Serial.print(GPS.minute, DEC); Serial.print(':');
@@ -421,7 +436,7 @@ void loop(){
                 Serial.println(GPS.year, DEC);
                 Serial.print("Fix: "); Serial.print((int)GPS.fix);
                 Serial.print(" quality: "); Serial.println((int)GPS.fixquality); 
-                Serial.print("Location: ");
+                Serial.print("Lat, Lng: ");
                 Serial.print(convertDegMinToDecDeg(GPS.latitude),6); Serial.print(GPS.lat);
                 Serial.print(", "); 
                 Serial.print(convertDegMinToDecDeg(GPS.longitude),6); Serial.println(GPS.lon);
@@ -454,10 +469,17 @@ void loop(){
     if ( led_pulse ) {
       led_pulse = false;
       
-      // see if we have GPS fix
-      if ( GPS.fix ) {
-        // turn on blue led
-        digitalWrite(BLU_LED, HIGH);
+      #ifdef USE_GPS
+        // see if we have GPS fix
+        if ( GPS.fix ) {
+          // turn on blue led
+          digitalWrite(BLU_LED, HIGH);
+        }
+      #endif
+      
+      // Green LED stays on when voltage is high, blinks if low voltage - needs calibrating
+      if ( mainLiPo_mV > 3000 ) {
+        digitalWrite(GRN_LED, HIGH);
       }
     } else {
       // fio is on so turn on the green led
@@ -477,6 +499,34 @@ void loop(){
   if (timer > millis())  timer = millis();
   //clearSerial();
   //delay(400);
+}
+
+// Function retrieves voltage of Fio
+// Code source: Scott Daniels http://provideyourown.com/2012/secret-arduino-voltmeter-measure-battery-voltage/
+long readVcc() {
+  // Read 1.1V reference against AVcc
+  // set the reference to Vcc and the measurement to the internal 1.1V reference
+  #if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+    ADMUX = _BV(REFS0) | _BV(MUX4) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
+  #elif defined (__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
+    ADMUX = _BV(MUX5) | _BV(MUX0);
+  #elif defined (__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
+    ADMUX = _BV(MUX3) | _BV(MUX2);
+  #else
+    ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
+  #endif  
+ 
+  delay(2); // Wait for Vref to settle
+  ADCSRA |= _BV(ADSC); // Start conversion
+  while (bit_is_set(ADCSRA,ADSC)); // measuring
+ 
+  uint8_t low  = ADCL; // must read ADCL first - it then locks ADCH  
+  uint8_t high = ADCH; // unlocks both
+ 
+  long result = (high<<8) | low;
+ 
+  result = 1125300L / result; // Calculate Vcc (in mV); 1125300 = 1.1*1023*1000
+  return result; // Vcc in millivolts
 }
 
 //void clearSerial() {
