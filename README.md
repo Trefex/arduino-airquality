@@ -1,6 +1,6 @@
 arduino-airquality
 ==================
- 
+   
 In this project, we are building a mobile Arduino Fio based platform to measure air quality.
 
 We currently have multiple components working correctly with the Arduino Fio:
